@@ -150,6 +150,19 @@
       return;
     }
     const s = acc.summary;
+    if (acc.offline) {
+      const off = [
+        ["acc_off_calc", s.calc_figure_hit, s.calc_figure_total, "o"],
+        ["acc_off_oos", s.out_of_scope_hit, s.out_of_scope_total, ""],
+        ["acc_off_wrong", s.no_wrong_figure, s.questions, ""],
+      ];
+      box.innerHTML = `<div class="acc"><p class="acc__empty">${esc(t("acc_off_note"))}</p>${off.map(([k, a, b, o]) => `
+        <div class="acc__row"><span class="acc__label">${esc(t(k))}</span><span class="acc__val">${a}/${b}</span>
+        <span class="acc__bar ${o ? "acc__bar--o" : ""}"><i style="--w:${Math.round((a / b) * 100)}%"></i></span></div>`).join("")}
+        <p class="acc__foot">${esc(t("acc_foot"))} · ${esc(acc.run_date || "")}</p></div>`;
+      requestAnimationFrame(() => $$(".acc__bar i", box).forEach((i) => { i.style.width = i.style.getPropertyValue("--w"); }));
+      return;
+    }
     const rows = [
       ["acc_rule", s.rule_hit, s.rule_total, ""],
       ["acc_nf", s.not_found_hit, s.not_found_total, "o"],

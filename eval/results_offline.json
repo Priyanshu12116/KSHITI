@@ -1,0 +1,192 @@
+{
+  "run_date": "11-10-2026 14:47",
+  "offline": true,
+  "model": "router + calculator (no API)",
+  "summary": {
+    "calc_figure_hit": 3,
+    "calc_figure_total": 3,
+    "out_of_scope_hit": 2,
+    "out_of_scope_total": 2,
+    "no_wrong_figure": 17,
+    "questions": 17
+  },
+  "questions": [
+    {
+      "id": 1,
+      "intent": "calculation",
+      "topics": [
+        "front_setback"
+      ],
+      "inputs": {
+        "road_width_m": 10.0,
+        "building_height_m": 9.0,
+        "building_use": "residential"
+      },
+      "calc": [
+        "Front open space (minimum): 3.6 m (Rule 56(1)(a), p.77)"
+      ],
+      "figures_ok": true,
+      "calc_expected": true
+    },
+    {
+      "id": 2,
+      "intent": "rule_question",
+      "topics": [
+        "far"
+      ],
+      "inputs": {
+        "building_use": "other"
+      },
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 3,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 4,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 5,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 6,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 7,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 8,
+      "intent": "rule_question",
+      "topics": [
+        "fee"
+      ],
+      "inputs": {
+        "building_use": "residential"
+      },
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 9,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 10,
+      "intent": "calculation",
+      "topics": [
+        "rear_setback"
+      ],
+      "inputs": {
+        "plot_area_sqm": 150.0,
+        "building_use": "residential"
+      },
+      "calc": [
+        "Rear open space (minimum): 1.5 m (Rule 56(2)(a), p.78)"
+      ],
+      "figures_ok": true,
+      "calc_expected": true
+    },
+    {
+      "id": 11,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {
+        "plot_area_sqm": 300.0
+      },
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 12,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 13,
+      "intent": "rule_question",
+      "topics": [],
+      "inputs": {
+        "building_height_m": 15.0
+      },
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 14,
+      "intent": "calculation",
+      "topics": [
+        "front_setback"
+      ],
+      "inputs": {
+        "road_width_m": 9.0,
+        "plot_area_sqm": 200.0
+      },
+      "calc": [
+        "Front open space (minimum): 3.0 m (Rule 56(1)(a), p.77)"
+      ],
+      "figures_ok": true,
+      "calc_expected": true
+    },
+    {
+      "id": 15,
+      "intent": "rule_question",
+      "topics": [
+        "fee"
+      ],
+      "inputs": {},
+      "calc": [],
+      "calc_expected": false
+    },
+    {
+      "id": 16,
+      "intent": "out_of_scope",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "out_of_scope_ok": true,
+      "calc_expected": false
+    },
+    {
+      "id": 17,
+      "intent": "out_of_scope",
+      "topics": [],
+      "inputs": {},
+      "calc": [],
+      "out_of_scope_ok": true,
+      "calc_expected": false
+    }
+  ]
+}

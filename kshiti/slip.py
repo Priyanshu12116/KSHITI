@@ -14,8 +14,6 @@ import io
 import json
 import re
 from datetime import datetime, timedelta, timezone
-from pathlib import Path
-
 import qrcode
 from fpdf import FPDF
 from fpdf.enums import XPos, YPos
@@ -137,6 +135,8 @@ class KshitiPDF(FPDF):
 
     # -------------------------------------------------------------- blocks
     def label(self, en: str, hi: str, color=INK) -> None:
+        if self.get_y() + 28 > self.page_break_trigger:
+            self.add_page()                       # never leave a section title alone at a page bottom
         self.ln(2.5)
         y = self.get_y()
         self.set_fill_color(*O600)
@@ -148,6 +148,19 @@ class KshitiPDF(FPDF):
         self.set_text_color(*color)
         self.cell(0, 5, f"{en.upper()}  ·  {hi}", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         self.ln(0.8)
+        self._last_label = (self.page_no(), y - 2.5, self.get_y(), en, hi, color)
+
+    def _move_to_new_page(self) -> None:
+        """Start a new page; if a section title was just drawn, carry it over instead of leaving it alone."""
+        last = getattr(self, "_last_label", None)
+        if last and last[0] == self.page_no() and abs(last[2] - self.get_y()) < 0.01:
+            _, y0, y1, en, hi, color = last
+            self.set_fill_color(*WHITE)
+            self.rect(12, y0, 186, y1 - y0, style="F")          # remove the stranded title
+            self.add_page()
+            self.label(en, hi, color)
+        else:
+            self.add_page()
 
     def box(self, text: str, *, font=("sans", "", 10.5), fill=WHITE, border=INK, shadow=True, lh=5.4, pad=3.2, dashed=False) -> None:
         """A bordered block with a hard offset shadow, like the cards in the interface."""
@@ -155,7 +168,8 @@ class KshitiPDF(FPDF):
         self.set_font(*font)
         h = self.multi_cell(w - 2 * pad, lh, text, dry_run=True, output="HEIGHT") + 2 * pad
         if self.get_y() + h > self.page_break_trigger and h < 200:
-            self.add_page()
+            self._move_to_new_page()
+            self.set_font(*font)
         x, y = 14, self.get_y()
         if h < 200:
             if shadow:

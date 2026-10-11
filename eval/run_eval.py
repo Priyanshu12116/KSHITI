@@ -35,6 +35,7 @@ from kshiti.router import route  # noqa: E402
 KEY = ROOT / "eval" / "answer_key.json"
 OUT_JSON = ROOT / "eval" / "results.json"
 OUT_MD = ROOT / "eval" / "results.md"
+OUT_OFFLINE = ROOT / "eval" / "results_offline.json"
 DEV_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
 
 
@@ -158,8 +159,24 @@ def main() -> None:
         items = [i for i in items if i["id"] in want]
 
     if args.offline:
+        rows = []
         for item in items:
-            print(json.dumps(offline_row(item), ensure_ascii=False))
+            row = offline_row(item)
+            row["calc_expected"] = item.get("calc", False)
+            rows.append(row)
+            print(json.dumps(row, ensure_ascii=False))
+        calc_rows = [r for r in rows if r["calc_expected"]]
+        oos = [r for r in rows if "out_of_scope_ok" in r]
+        summary = {
+            "calc_figure_hit": sum(r.get("figures_ok", False) for r in calc_rows), "calc_figure_total": len(calc_rows),
+            "out_of_scope_hit": sum(r["out_of_scope_ok"] for r in oos), "out_of_scope_total": len(oos),
+            "no_wrong_figure": sum(1 for r in rows if not (r["calc"] and not r["calc_expected"])), "questions": len(rows),
+        }
+        if not args.only:
+            OUT_OFFLINE.write_text(json.dumps({"run_date": datetime.now().strftime("%d-%m-%Y %H:%M"), "offline": True,
+                                               "model": "router + calculator (no API)", "summary": summary, "questions": rows},
+                                              ensure_ascii=False, indent=2), encoding="utf-8")
+        print(json.dumps(summary, indent=2))
         return
 
     from kshiti.engine import MODEL

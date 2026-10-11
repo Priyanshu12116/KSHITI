@@ -29,6 +29,7 @@ ROOT = Path(__file__).resolve().parent.parent
 STATIC = ROOT / "app" / "static"
 PDF_EN = ROOT / "data" / "source" / "rules_EN.pdf"
 EVAL_RESULTS = ROOT / "eval" / "results.json"
+EVAL_OFFLINE = ROOT / "eval" / "results_offline.json"
 FIXTURES = ROOT / "tests" / "fixtures"
 DEV = os.environ.get("KSHITI_DEV") == "1"
 
@@ -69,7 +70,12 @@ def meta() -> JSONResponse:
 
     load_dotenv()
     rules = load_rules()
-    accuracy = json.loads(EVAL_RESULTS.read_text(encoding="utf-8")) if EVAL_RESULTS.exists() else None
+    accuracy = None
+    for path in (EVAL_RESULTS, EVAL_OFFLINE):          # live results win; offline check until then
+        if path.exists():
+            accuracy = json.loads(path.read_text(encoding="utf-8"))
+            accuracy.pop("questions", None)
+            break
     return JSONResponse({
         "rules_version": RULES_VERSION,
         "rules_count": len(rules),
