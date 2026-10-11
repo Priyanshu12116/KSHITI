@@ -1,0 +1,502 @@
+{
+  "run_date": "11-10-2026 15:35",
+  "model": "openai/gpt-oss-120b on Groq",
+  "offline": false,
+  "summary": {
+    "rule_hit": 15,
+    "rule_total": 15,
+    "not_found_hit": 2,
+    "not_found_total": 2,
+    "false_not_found": 0,
+    "figure_hit": 5,
+    "figure_total": 5,
+    "lang_hit": 17,
+    "lang_total": 17,
+    "quotes_verified": 37,
+    "quotes_total": 37,
+    "invented_rules": 0,
+    "amendment_hit": 1,
+    "amendment_total": 1,
+    "errors": 0,
+    "median_seconds": 29.6
+  },
+  "questions": [
+    {
+      "id": 1,
+      "q": "My house faces a 10 m wide street and will be 9 m tall. How much open space do I leave at the front?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "56"
+      ],
+      "mentioned_rules": [
+        "56"
+      ],
+      "calc": [
+        "Front open space (minimum): 3.6 m"
+      ],
+      "answer": "3.6 m, because the street is more than 9.0 meters and up to 12 meters wide (Rule 56(1)(a)).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [
+        "table"
+      ],
+      "error": "",
+      "seconds": 2.93,
+      "router": "rules",
+      "router_seconds": 0.006,
+      "first_figure_s": 0.03,
+      "rule_ok": true,
+      "false_not_found": false,
+      "figures_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 2,
+      "q": "I want a farm house on agricultural land. What is the minimum plot size and the maximum FAR?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "17"
+      ],
+      "mentioned_rules": [
+        "17(a)",
+        "17(b)"
+      ],
+      "calc": [],
+      "answer": "0.40 hectare, because the minimum plot size for a farm house is specified as 0.40 hectare (Rule 17(a)). 0.10, because the maximum floor area ratio is limited to 0.10 (Rule 17(b)).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [],
+      "error": "",
+      "seconds": 10.23,
+      "router": "rules",
+      "router_seconds": 0.001,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "figures_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 3,
+      "q": "My development permission was granted in 2023. How long does it stay valid, and how many times can I renew it?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "23"
+      ],
+      "mentioned_rules": [
+        "23"
+      ],
+      "calc": [],
+      "answer": "The development permission remains valid for up to three years from the date of grant (Rule 23(1)). It can be revalidated for two consecutive one‑year terms, after which a fresh application is required (Rule 23(2)).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [],
+      "error": "",
+      "seconds": 18.62,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 4,
+      "q": "I applied for building permission and the authority has not replied. What happens if they miss the deadline?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "28"
+      ],
+      "mentioned_rules": [
+        "28"
+      ],
+      "calc": [],
+      "answer": "0 days, because the authority failed to refuse the application within the period prescribed in sub‑section (5) of Section 30 of the Act, the permission is deemed to have been sanctioned (Rule 28). This deemed sanction does not permit any construction that violates the Act, the Development Plan, Zoning Plan or any other law (Rule 28).",
+      "citations": 1,
+      "verified": 1,
+      "warnings": [],
+      "error": "",
+      "seconds": 31.81,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 5,
+      "q": "How far must my balcony stay from a low-voltage overhead electric line, vertically and horizontally?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "52"
+      ],
+      "mentioned_rules": [
+        "52"
+      ],
+      "calc": [],
+      "answer": "The balcony must be at least 2.5 m below a low‑voltage overhead line and at least 1.2 m away horizontally, because the line is low and medium voltage (Rule 52(1)(a)).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [
+        "table"
+      ],
+      "error": "",
+      "seconds": 26.79,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "figures_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 6,
+      "q": "Who is allowed to sign and submit my building plans?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "18",
+        "26",
+        "26-B"
+      ],
+      "mentioned_rules": [
+        "18",
+        "26",
+        "26-B"
+      ],
+      "calc": [],
+      "answer": "18, because the architect, structural engineer, engineer, supervisor or town planner must prepare and duly sign any plan and indicate their name, address, qualifications and license number (Rule 18). 26(A), because a registered architect is competent to carry out the work related to building permission and is entitled to submit the plans (Rule 26(A)). 26(D), because a licensed supervisor may submit all plans for residential buildings on plots up to 200 sq m and up to two stories or 7.5 m height (Rule 26(D)). 26-B(5), because an authorised architect or structural engineer who prepared the plans must place their license number, name, seal, registration number and signature on the map (Rule 26-B(5)).",
+      "citations": 4,
+      "verified": 4,
+      "warnings": [],
+      "error": "",
+      "seconds": 30.7,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 7,
+      "q": "What documents go with an application for building permission?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "16",
+        "14"
+      ],
+      "mentioned_rules": [
+        "16",
+        "14"
+      ],
+      "calc": [],
+      "answer": "The application must be accompanied by the application fee, a key plan, site plans, the subdivision/layout plan approved under section 30 of the Madhya Pradesh Nagar Tatha Gram Nivesh Adhiniyam 1973, building plans, service plans, a project report outlining the proposed development, documents proving ownership or any legal right in relation to the site, proof of authorization by the owner if the applicant is not the owner, parking plans with calculations, and a certificate of supervision as prescribed in sub‑rule (2)‑(12) of Rule 16 (Rule 16). All these documents, plans and statements must be submitted in quadruplicate, with an electronic copy prepared in the software directed by the Authority (Rule 14).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [],
+      "error": "",
+      "seconds": 31.11,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 8,
+      "q": "What is the fee for building permission for a residential house?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "21"
+      ],
+      "mentioned_rules": [],
+      "calc": [],
+      "answer": "The building permission fee for a residential house is Rs 1.00 per square metre of the proposed built‑up area, and it must be paid before the permission is issued.",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [],
+      "error": "",
+      "seconds": 28.54,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 9,
+      "q": "Can I change my plan after it is sanctioned?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "24",
+        "27"
+      ],
+      "mentioned_rules": [
+        "24",
+        "27"
+      ],
+      "calc": [],
+      "answer": "No, a deviation from a sanctioned plan is generally not permissible (Rule 24(1)). If you still wish to alter the plan, the local authority may allow it only by charging a compounding fee as prescribed (Rule 24(3)). The authority can also sanction the plan with modifications or conditions at its discretion (Rule 27(1)). Therefore any change after sanction requires explicit permission and may involve fees.",
+      "citations": 3,
+      "verified": 3,
+      "warnings": [],
+      "error": "",
+      "seconds": 29.58,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 10,
+      "q": "What is the minimum rear open space for a 150 sq m residential plot?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "56"
+      ],
+      "mentioned_rules": [
+        "56"
+      ],
+      "calc": [
+        "Rear open space (minimum): 1.5 m"
+      ],
+      "answer": "1.5 m, because the plot area is above 40.00 and up to 150.00 sq m (Rule 56(2)(a)).",
+      "citations": 2,
+      "verified": 2,
+      "warnings": [
+        "table"
+      ],
+      "error": "",
+      "seconds": 26.84,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": 0.0,
+      "rule_ok": true,
+      "false_not_found": false,
+      "figures_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 11,
+      "q": "Do I need separate development permission for a 300 sq m plot that matches the Development Plan? (Tip: this changed in August 2026.)",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "12"
+      ],
+      "mentioned_rules": [
+        "12",
+        "2"
+      ],
+      "calc": [],
+      "answer": "300 sq m, because the plot matches the Development Plan, normally requires both a development permission and a building permission before construction can start (Rule 12(3)). Since the plot size is 300 sq m and conforms to the approved plan, the earlier rule would still mandate a separate development permission. But the provision was amended on 28 August 2026, allowing plots up to 500 sq m that conform to the Development Plan to proceed without a separate development permission (Rule 2(5)(c) amendment).",
+      "citations": 1,
+      "verified": 1,
+      "warnings": [
+        "amendment"
+      ],
+      "error": "",
+      "seconds": 31.54,
+      "router": "rules",
+      "router_seconds": 0.001,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "amendment_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 12,
+      "q": "Which rule decides what happens when the Development Plan and these rules disagree?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "103"
+      ],
+      "mentioned_rules": [
+        "103"
+      ],
+      "calc": [],
+      "answer": "Rule 103 states that the norms and regulations applicable in the plan area shall be those prescribed in the relevant development plan (Rule 103). If the development plan’s norms differ or are contrary to the rules, the Director must examine the matter and forward a proposal to the Government, whose decision is final and becomes part of the development plan (Rule 103).",
+      "citations": 3,
+      "verified": 3,
+      "warnings": [],
+      "error": "",
+      "seconds": 33.64,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 13,
+      "q": "What are the rules for lifts in a building taller than 15 m?",
+      "lang_expected": "en",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "83"
+      ],
+      "mentioned_rules": [
+        "83"
+      ],
+      "calc": [],
+      "answer": "12.5 m, because the building exceeds 12.5 meters (Rule 83 Provision of Lifts, Escalators or Moving Walks) – a lift must be provided. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (1)) – the owner must furnish lift installation details in Appendix A‑2(A) with the permission application. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (2)) – a work completion report must be submitted and the authority will issue a unique registration number for each lift. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (5), (6), (9), (10), (14), (30)) – the owner must follow maintenance instructions, keep the lift insured, report any accident within 24 hours, maintain an inventory, and submit six‑monthly safety and audit reports as required by NBC.",
+      "citations": 9,
+      "verified": 9,
+      "warnings": [],
+      "error": "",
+      "seconds": 39.41,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 14,
+      "q": "मेरा प्लॉट 200 वर्ग मीटर का है और सामने 9 मीटर चौड़ी सड़क है। आगे कितनी जगह खाली छोड़नी होगी?",
+      "lang_expected": "hi",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "56"
+      ],
+      "mentioned_rules": [],
+      "calc": [
+        "Front open space (minimum): 3.0 m"
+      ],
+      "answer": "सामने का खुला स्थान (न्यूनतम): 3.0 m (नियम 56(1)(a), पृष्ठ 77)। सड़क की चौड़ाई 9.0 मीटर, तालिका की पंक्ति \"Up to 9.0 meters\" में आती है।",
+      "citations": 1,
+      "verified": 1,
+      "warnings": [
+        "info"
+      ],
+      "error": "",
+      "seconds": 36.03,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": 0.0,
+      "rule_ok": true,
+      "false_not_found": false,
+      "figures_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 15,
+      "q": "बिल्डिंग परमिशन की फीस कितनी है और किस नियम में लिखी है?",
+      "lang_expected": "hi",
+      "found_expected": true,
+      "status": "answered",
+      "cited_rules": [
+        "21"
+      ],
+      "mentioned_rules": [
+        "21"
+      ],
+      "calc": [],
+      "answer": "बिल्डिंग परमिशन की फीस प्रस्तावित निर्मित क्षेत्र के प्रत्येक वर्ग मीटर पर ₹1.00 है, यह नियम 21 के उप‑नियम (3) के अनुच्छेद (ii) में निर्धारित है।",
+      "citations": 1,
+      "verified": 1,
+      "warnings": [],
+      "error": "",
+      "seconds": 4.7,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "rule_ok": true,
+      "false_not_found": false,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 16,
+      "q": "How do I pay my property tax online?",
+      "lang_expected": "en",
+      "found_expected": false,
+      "status": "not_found",
+      "cited_rules": [],
+      "mentioned_rules": [],
+      "calc": [],
+      "answer": "The MP Bhumi Vikas Rules do not contain provisions for online payment of property tax.",
+      "citations": 0,
+      "verified": 0,
+      "warnings": [],
+      "error": "",
+      "seconds": 30.89,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "not_found_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    },
+    {
+      "id": 17,
+      "q": "What is the current market rate for land in Kolar Road, Bhopal?",
+      "lang_expected": "en",
+      "found_expected": false,
+      "status": "not_found",
+      "cited_rules": [],
+      "mentioned_rules": [],
+      "calc": [],
+      "answer": "The rulebook does not contain any information on market rates for land.",
+      "citations": 0,
+      "verified": 0,
+      "warnings": [],
+      "error": "",
+      "seconds": 16.81,
+      "router": "rules",
+      "router_seconds": 0.0,
+      "first_figure_s": null,
+      "not_found_ok": true,
+      "lang_ok": true,
+      "invented_rules": 0
+    }
+  ]
+}

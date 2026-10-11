@@ -33,11 +33,15 @@ def accuracy_text() -> str:
     live = ROOT / "eval" / "results.json"
     off = ROOT / "eval" / "results_offline.json"
     if live.exists():
-        s = json.loads(live.read_text(encoding="utf-8"))["summary"]
-        return (f"Live run on the 17 official sample questions: correct rule {s['rule_hit']}/{s['rule_total']}, "
-                f"\"not found\" {s['not_found_hit']}/{s['not_found_total']}, table figures {s['figure_hit']}/{s['figure_total']}, "
+        res = json.loads(live.read_text(encoding="utf-8"))
+        s = res["summary"]
+        return (f"Live run on the 17 official sample questions ({res.get('model', '')}, {res.get('run_date', '')}): "
+                f"correct rule {s['rule_hit']}/{s['rule_total']}, \"not found\" {s['not_found_hit']}/{s['not_found_total']} "
+                f"(wrong not-found {s['false_not_found']}), table figures {s['figure_hit']}/{s['figure_total']}, "
                 f"answer language {s['lang_hit']}/{s['lang_total']}, quotes verified {s['quotes_verified']}/{s['quotes_total']}, "
-                f"invented rule numbers {s['invented_rules']}.")
+                f"invented rule numbers {s['invented_rules']}, amendment flagged {s['amendment_hit']}/{s['amendment_total']}. "
+                "Q14 was answered by the calculator after the model wrongly said \"not found\". Single answers took 3 to 5 s; "
+                "the batch median was higher because of free-tier rate limits.")
     s = json.loads(off.read_text(encoding="utf-8"))["summary"]
     return (f"Offline check on the 17 official sample questions (router and calculator, no AI): calculator figures "
             f"{s['calc_figure_hit']}/{s['calc_figure_total']} correct, out-of-scope questions caught "
@@ -63,10 +67,11 @@ def main() -> None:
             "within a minute, with the rule number to show the citizen.", fill=G100, shadow=False)
 
     pdf.label("What Kshiti does", "क्षिति क्या करता है")
-    pdf.box("1. Reads the question in under a second (Cerebras): language, topic, the citizen's numbers.\n"
+    pdf.box("1. Reads the question in milliseconds: language, topic, the citizen's numbers.\n"
             "2. Calculates figures in code from tables checked against the official PDF: front, rear and side open space "
             "(Rule 56), FAR and maximum built-up area (Rule 61), height band (Rule 42), fees (Rule 21).\n"
-            "3. Writes a short answer in the question's language from the 106 rules only, citing the exact paragraph (Claude).\n"
+            "3. Writes a short answer in the question's language from the rules only, quoting the exact paragraph: Claude Opus 5.5 "
+            "when an Anthropic key is set, gpt-oss-120b on Groq otherwise (the engine used at the event).\n"
             "4. Checks every quote word for word against the official text; removes anything that does not match; flags "
             "rule numbers that do not exist; flags the 28-08-2026 amendment.\n"
             "5. Shows the proof (rule, page, official text, PDF link) and prints a PDF slip with a receipt ID and QR code.",
@@ -86,7 +91,7 @@ def main() -> None:
             "• \"Not found\" when the rules are silent; never answers from general knowledge.\n"
             "• Never assumes a missing fact (road width, plot area, height); asks the clerk.\n"
             "• Every answer and slip states the rules version (consolidated 06-03-2025) and a SHA-256 fingerprint.\n"
-            "• Cerebras numbers are accepted only if written in the question; special uses never get residential figures.",
+            "• Numbers read from the question are accepted only if written in it; special uses never get residential figures.",
             font=("sans", "", 9.5), lh=5)
 
     pdf.label("Measured accuracy", "मापी गई सटीकता", color=O700)

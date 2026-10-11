@@ -16,12 +16,35 @@ from collections.abc import Callable
 
 from pydantic import BaseModel, Field
 
+import os
+
+from . import engine as claude_engine
+from . import groq_engine
 from .calculator import CalcOutput, calculate
-from .engine import ask
-from .models import Answer, Warning_
+from .models import Answer, Citation, Warning_
+from .lang import detect_lang
+from .rules import get_rule
 from .router import Route, route
 
 Event = Callable[[str, object], None]
+
+
+def _claude_configured() -> bool:
+    k = os.environ.get("ANTHROPIC_API_KEY", "")
+    return bool(k) and not k.startswith("dummy")
+
+
+def provider() -> str:
+    """Claude when an Anthropic key is set; otherwise Groq (gpt-oss) when a Groq key is set."""
+    if _claude_configured():
+        return "claude"
+    return "groq" if groq_engine.available() else "claude"
+
+
+def ask(question: str, on_text=None, context: str = "", forced_rules: list[str] | None = None) -> Answer:
+    if provider() == "groq":
+        return groq_engine.ask(question, on_text=on_text, context=context, forced_rules=forced_rules)
+    return claude_engine.ask(question, on_text=on_text, context=context)
 
 
 class Result(BaseModel):
@@ -69,6 +92,46 @@ def cross_check(answer: Answer, calc: CalcOutput) -> None:
             ))
 
 
+def answer_from_calculator(answer: Answer, calc: CalcOutput, question: str) -> None:
+    """If the model says "not found" or fails but code found verified figures, the figures win."""
+    if not calc.results or answer.status not in ("not_found", "error", "unverified"):
+        return
+    if answer.status == "unverified" and answer.text:
+        return
+    hi = detect_lang(question) == "hi"
+    lines = [f"{(r.label_hi if hi else r.label_en)}: {r.display} (नियम {r.sub_rule}, पृष्ठ {r.page})। {r.basis_hi}" if hi
+             else f"{r.label_en}: {r.display} (Rule {r.sub_rule}, page {r.page}). {r.basis_en}" for r in calc.results]
+    answer.text = " ".join(lines)
+    answer.lang = "hi" if hi else "en"
+    answer.status = "answered"
+    answer.error = ""
+    answer.not_found_reason = ""
+    answer.warnings.append(Warning_(
+        kind="info",
+        text_en="This answer was written from the calculator, using the official table checked against the PDF.",
+        text_hi="यह उत्तर गणना से लिखा गया है, PDF से जाँची गई आधिकारिक तालिका के आधार पर।",
+    ))
+
+
+def attach_calc_citations(answer: Answer, calc: CalcOutput) -> None:
+    """A calculated figure always shows the official table it came from (already checked word for word)."""
+    if answer.status not in ("answered", "unverified"):
+        return
+    have = {(c.rule, " ".join(c.quote.split())[:80]) for c in answer.citations}
+    for r in calc.results:
+        if not (r.verified and r.quote):
+            continue
+        key = (r.rule, " ".join(r.quote.split())[:80])
+        if key in have or any(c.rule == r.rule and c.is_table and c.page == r.page for c in answer.citations):
+            continue
+        rule = get_rule(r.rule)
+        answer.citations.insert(0, Citation(rule=r.rule, title=rule.title, part=rule.part, page=r.page, quote=r.quote,
+                                            supports=f"{r.label_en}: {r.display}", verified=True, is_table=True))
+        have.add(key)
+    if answer.status == "unverified" and answer.citations:
+        answer.status = "answered"
+
+
 def run(question: str, on_event: Event | None = None) -> Result:
     emit = on_event or (lambda kind, data: None)
     t0 = time.perf_counter()
@@ -80,8 +143,11 @@ def run(question: str, on_event: Event | None = None) -> Result:
     first_fig = round(time.perf_counter() - t0, 2) if calc.results else None
     emit("calc", calc)
 
-    answer = ask(question, on_text=lambda t: emit("text", t), context=calc_context(calc))
+    forced = list(dict.fromkeys(r.rule for r in calc.results))
+    answer = ask(question, on_text=lambda t: emit("text", t), context=calc_context(calc), forced_rules=forced)
     answer.timing.router_s = rt.seconds
+    answer_from_calculator(answer, calc, question)
+    attach_calc_citations(answer, calc)
     cross_check(answer, calc)
     result = Result(question=question, route=rt, calc=calc, answer=answer,
                     seconds_to_first_figure=first_fig, seconds_total=round(time.perf_counter() - t0, 2))

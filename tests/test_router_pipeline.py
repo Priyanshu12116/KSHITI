@@ -101,7 +101,7 @@ def test_calc_context_and_cross_check_warns_on_missing_figure():
 def test_pipeline_emits_figure_before_answer(monkeypatch):
     events = []
 
-    def fake_ask(question, on_text=None, context=""):
+    def fake_ask(question, on_text=None, context="", **kw):
         assert "3.6 m" in context
         on_text("3.6 m")
         return Answer(question=question, text="3.6 m, Rule 56(1)(a).")
@@ -110,3 +110,15 @@ def test_pipeline_emits_figure_before_answer(monkeypatch):
     res = pipeline.run(Q[1], on_event=lambda kind, data: events.append(kind))
     assert events == ["route", "calc", "text", "done"]
     assert res.calc.results[0].display == "3.6 m" and res.seconds_to_first_figure is not None
+
+
+def test_calculator_figures_win_over_a_wrong_not_found(monkeypatch):
+    def fake_ask(question, on_text=None, context="", **kw):
+        return Answer(question=question, status="not_found", not_found_reason="not in sources")
+
+    monkeypatch.setattr(pipeline, "ask", fake_ask)
+    res = pipeline.run(Q[14])
+    a = res.answer
+    assert a.status == "answered" and "3.0 m" in a.text and a.lang == "hi"
+    assert a.citations and a.citations[0].rule == "56" and a.citations[0].verified
+    assert any(w.kind == "info" for w in a.warnings)

@@ -53,6 +53,12 @@ def _configured(var: str) -> bool:
     return bool(v) and not v.startswith("dummy")
 
 
+def _engine() -> str:
+    from kshiti.pipeline import provider
+
+    return provider()
+
+
 @app.get("/", response_class=HTMLResponse)
 def index() -> HTMLResponse:
     return HTMLResponse((STATIC / "index.html").read_text(encoding="utf-8"))
@@ -84,6 +90,9 @@ def meta() -> JSONResponse:
         "rules_file": RULES_FILE.name,
         "amendments": load_amendments(),
         "services": {
+            "engine": _engine(),
+            "groq": _configured("GROQ_API_KEY"),
+            "groq_model": os.environ.get("KSHITI_GROQ_MODEL", "openai/gpt-oss-120b"),
             "claude": _configured("ANTHROPIC_API_KEY"),
             "cerebras": _configured("CEREBRAS_API_KEY"),
             "claude_model": os.environ.get("KSHITI_MODEL", "claude-opus-5-5"),

@@ -152,6 +152,7 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--offline", action="store_true")
     ap.add_argument("--only", default="")
+    ap.add_argument("--redo", default="", help="re-run these ids and merge into eval/results.json")
     args = ap.parse_args()
     items = json.loads(KEY.read_text(encoding="utf-8"))["questions"]
     if args.only:
@@ -179,9 +180,17 @@ def main() -> None:
         print(json.dumps(summary, indent=2))
         return
 
-    from kshiti.engine import MODEL
-    from kshiti.pipeline import run
+    from kshiti import groq_engine
+    from kshiti.engine import MODEL as CLAUDE_MODEL
+    from kshiti.pipeline import provider, run
 
+    MODEL = f"{groq_engine.ANSWER_MODEL} on Groq" if provider() == "groq" else CLAUDE_MODEL
+
+    previous = {}
+    if args.redo:
+        want = {int(x) for x in args.redo.split(",")}
+        previous = {r["id"]: r for r in json.loads(OUT_JSON.read_text(encoding="utf-8"))["questions"]}
+        items = [i for i in items if i["id"] in want]
     rows = []
     for item in items:
         t0 = time.perf_counter()
@@ -192,6 +201,9 @@ def main() -> None:
         print(f"[{flag}] Q{item['id']:>2} {row['status']:<11} cited={row['cited_rules']} verified={row['verified']}/{row['citations']} "
               f"figs={row.get('figures_ok', '-')} lang={row['lang_ok']} warn={row['warnings']} {time.perf_counter() - t0:.1f}s"
               + (f" ERROR: {row['error']}" if row["error"] else ""))
+    if previous:
+        previous.update({r["id"]: r for r in rows})
+        rows = [previous[k] for k in sorted(previous)]
     res = summarise(rows, MODEL, offline=False)
     if not args.only:
         OUT_JSON.write_text(json.dumps(res, ensure_ascii=False, indent=2), encoding="utf-8")

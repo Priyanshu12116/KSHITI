@@ -60,11 +60,17 @@ def load_amendments() -> list[dict]:
     return json.loads(Path(AMENDMENTS_FILE).read_text(encoding="utf-8"))
 
 
-def amendment_warnings(question: str, cited_rules: list[str]) -> list[Warning_]:
+def amendment_warnings(question: str, cited_rules: list[str], quotes: list[tuple[str, str]] | None = None) -> list[Warning_]:
+    """Warn when the question is about an amended provision, or an answer quotes the amended clause itself."""
     out: list[Warning_] = []
     q = question.lower()
     for a in load_amendments():
-        by_rule = any(normalise_rule_no(r) in a["triggers"] for r in cited_rules)
+        phrases = [t.lower() for t in a.get("trigger_quotes", [])]
+        if quotes is not None and phrases:
+            by_rule = any(normalise_rule_no(r) in a["triggers"] and any(ph in " ".join(t.split()).lower() for ph in phrases)
+                          for r, t in quotes)
+        else:
+            by_rule = any(normalise_rule_no(r) in a["triggers"] for r in cited_rules)
         by_words = any(k.lower() in q for k in a["keywords"])
         if by_rule or by_words:
             out.append(
@@ -104,7 +110,8 @@ def verify(answer: Answer) -> Answer:
     answer.citations = _dedupe(kept)
 
     answer.mentioned_rules = mentioned_rules(answer.text)
-    invented = [r for r in answer.mentioned_rules if not rule_exists(r)]
+    # "17(a)" is clause (a) of Rule 17; only the rule number itself must exist.
+    invented = [r for r in answer.mentioned_rules if not rule_exists(re.sub(r"\s*\([a-z]\)$", "", r))]
     if invented:
         answer.warnings.append(
             Warning_(
@@ -137,7 +144,8 @@ def verify(answer: Answer) -> Answer:
             )
             break
 
-    answer.warnings.extend(amendment_warnings(answer.question, answer.cited_rules + answer.mentioned_rules))
+    quotes = [(c.rule, c.quote) for c in answer.citations]
+    answer.warnings.extend(amendment_warnings(answer.question, answer.cited_rules, quotes))
     return answer
 
 

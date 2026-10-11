@@ -2,12 +2,12 @@
 
 ## Before recording (5 minutes)
 
-1. Real API keys in `.env`, then `python tools/check_keys.py` shows two "OK" lines.
+1. A working key in `.env`: `GROQ_API_KEY` (used at the event) or `ANTHROPIC_API_KEY`. Do not ask questions in the browser while `eval/run_eval.py` is running: the free Groq quota is 8,000 tokens per minute.
 2. `python run.py`. Open http://localhost:8000 in a fresh browser window (the opening animation plays once per session; open a new window to see it again).
-3. Ask the headline question once before recording, so the rulebook is in Claude's cache and answers come back fast.
+3. Wait one minute after any other use, so the free quota is fresh; each answer then takes a few seconds.
 4. Screen at 1366×768 or 1920×1080, browser zoom 100%, notifications off.
 
-> If the keys are not working by recording time, do **not** present recorded sample answers as live answers. Either record only what works live (opening, interface, calculator figures, "not found" check from the router) or say on screen: "sample answer recorded for layout; live answers need the API key".
+> Say which model answers: during the event Kshiti runs on **gpt-oss-120b on Groq** (the interface shows it in the progress bar and the "How an answer is made" panel). The Claude engine is in the code and is used automatically when an Anthropic key is set. Do not call the Groq answers "Claude".
 
 ## 2-minute recording (record at 16:00)
 
@@ -15,7 +15,7 @@
 |---|---|---|
 | 0:00–0:10 | Opening animation | "This is Kshiti, for the building-permission clerk at the Bhopal Municipal Corporation." |
 | 0:10–0:20 | Home screen, point at the four guarantee cards | "A citizen asks a question. The clerk needs a correct answer in a minute, with the rule to show." |
-| 0:20–0:50 | Click the first example (200 sq m, 9 m road). Point at the figure cards as they appear, then the answer | "The figures appear first. They are calculated in code from tables checked against the official PDF: 3 metres in front, 250 square metres of built-up area, 12.5 metres height, Rs 3,250 in fees. Then Claude writes the answer, citing the rules." |
+| 0:20–0:50 | Click the first example (200 sq m, 9 m road). Point at the figure cards as they appear, then the answer | "The figures appear first. They are calculated in code from tables checked against the official PDF: 3 metres in front, 250 square metres of built-up area, 12.5 metres height, Rs 3,250 in fees. Then the language model, here gpt-oss-120b on Groq, writes the answer from the rule text and quotes it." |
 | 0:50–1:05 | Scroll to the source cards; click "Open PDF at page 77" | "Every quote is the official text, checked word for word. The matching table row is highlighted, and this opens the PDF at the right page." |
 | 1:05–1:20 | Click the Hindi example | "Questions in Hindi get answers in Hindi." |
 | 1:20–1:32 | Click "How do I pay my property tax online?" | "When the rules are silent, Kshiti says so. It does not guess." |
@@ -36,6 +36,7 @@
 - **What if the AI makes up a rule?** Every quote must match the official text word for word, or it is removed. Rule numbers that do not exist are flagged. An answer with no verified quote is marked "Not verified".
 - **What if the table number is wrong?** Table figures come from code, not from the model. Each row was read from the PDF and is tested against the rule text, including boundaries such as exactly 9 m or 150 sq m.
 - **How do you handle new amendments?** Add an entry to `data/amendments.json`; Kshiti warns on every related answer. When a new consolidated rulebook is published, replace the data file; the fingerprint on every slip changes with it.
-- **What does it cost to run?** The whole rulebook is cached by Claude, so after the first question each answer reads it from the cache.
-- **Why Cerebras?** It reads the question and extracts the citizen's numbers in well under a second, so figures appear immediately. It never writes the answer, and any number it returns that is not in the question is discarded.
+- **Which AI does it use?** At the event: gpt-oss-120b on Groq, because that was the key available. With an Anthropic key it switches to Claude Opus 5.5 with built-in citations over all 106 rules. Both go through the same checks, so neither can show an unverified quote as verified.
+- **What does it cost to run?** On Groq's free tier, nothing. With Claude, the rulebook is cached, so after the first question each answer reads it from the cache.
+- **Cerebras?** The Cerebras router is built in (it would read the question and extract numbers in well under a second), but no Cerebras key was used at the event; the local rule-based reader did that job in milliseconds.
 - **Number of floors?** The rules limit height and built-up area; they do not state a number of floors. Kshiti says that rather than inventing one.

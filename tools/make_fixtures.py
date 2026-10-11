@@ -31,7 +31,7 @@ def cite(rule: str, marker: str):
 
 
 def fake_ask(blocks, status_tool=None):
-    def _ask(question, on_text=None, context=""):
+    def _ask(question, on_text=None, context="", **kw):
         content = [NS(type="text", text=t, citations=cs) for t, cs in blocks]
         if status_tool:
             content.append(NS(type="tool_use", name=status_tool[0], input=status_tool[1]))

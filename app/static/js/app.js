@@ -78,7 +78,8 @@
     const seen = sessionStorage.getItem("kshiti.splash") === "1";
     const svg = await loadWordmark();
     $("#brand-mark").innerHTML = svg;
-    if (seen || params.get("nosplash") === "1" || !svg) {
+    const force = params.get("splash") === "1";
+    if ((seen && !force) || params.get("nosplash") === "1" || !svg) {
       el.remove();
       return;
     }
@@ -91,21 +92,29 @@
       p.style.strokeDashoffset = `${len}`;
     });
     void mark.offsetWidth;                 // commit start state before animating
-    el.classList.add("is-play");
-    const hold = reduceMotion ? 200 : 2850;
-    await wait(hold);
+    el.classList.add(reduceMotion ? "is-calm" : "is-play");
+
+    // Hold long enough to be seen; click or any key skips.
+    let skip;
+    const skipped = new Promise((r) => { skip = r; });
+    const onSkip = () => skip();
+    setTimeout(() => { el.addEventListener("click", onSkip); document.addEventListener("keydown", onSkip, { once: true }); }, 600);
+    await Promise.race([wait(reduceMotion ? 3200 : 5300), skipped]);
+    el.removeEventListener("click", onSkip);
+    document.removeEventListener("keydown", onSkip);
 
     // Fly the wordmark into the header (FLIP), then reveal the page.
     const target = $("#brand-mark").getBoundingClientRect();
     const from = mark.getBoundingClientRect();
     if (!reduceMotion && target.width) {
+      $$(".g", mark).forEach((p) => { p.style.strokeWidth = "0"; p.style.fillOpacity = "1"; });
       const dx = target.left + target.width / 2 - (from.left + from.width / 2);
       const dy = target.top + target.height / 2 - (from.top + from.height / 2);
       const s = target.height / from.height;
-      $$(".splash__swash, .splash__latin, .splash__tag", el).forEach((n) => n.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 260, fill: "forwards" }));
+      $$(".splash__swash, .splash__latin, .splash__tag, .splash__skip", el).forEach((n) => n.animate([{ opacity: getComputedStyle(n).opacity }, { opacity: 0 }], { duration: 380, fill: "forwards" }));
       await mark.animate(
         [{ transform: "none" }, { transform: `translate(${dx}px, ${dy}px) scale(${s})` }],
-        { duration: 720, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" },
+        { duration: 1000, easing: "cubic-bezier(.65,0,.35,1)", fill: "forwards" },
       ).finished;
     }
     document.body.classList.remove("is-splash");
@@ -139,7 +148,13 @@
       ${esc(state.lang === "hi" ? a.summary_hi : a.summary_en)}</div>`).join("");
     const s = m.services;
     const chip = (name, on, model) => `<span class="chip ${on ? "chip--ok" : "chip--off"}" title="${esc(model)}">${icon(on ? "seal" : "info", "ic ic--sm")}${name} · ${esc(on ? t("svc_on") : t("svc_off"))}</span>`;
-    $("#m-svc").innerHTML = chip("Cerebras", s.cerebras, s.cerebras_model) + chip("Claude", s.claude, s.claude_model);
+    const groqModel = (s.groq_model || "").split("/").pop();
+    $("#m-svc").innerHTML = chip("Cerebras", s.cerebras, s.cerebras_model) + chip("Claude", s.claude, s.claude_model)
+      + (s.groq ? chip(`Groq ${groqModel}`, s.groq, s.groq_model) : "");
+    // Describe the engine that is actually answering.
+    const groq = s.engine === "groq";
+    $('[data-i18n="h1_d"]').textContent = s.cerebras ? t("h1_d") : t("h1_d_local");
+    $('[data-i18n="h3_d"]').textContent = groq ? t("h3_d_groq").replace("{m}", groqModel) : t("h3_d");
     renderAccuracy(m.accuracy);
   }
 
@@ -176,6 +191,12 @@
       ${s.median_seconds != null ? `<div class="acc__row"><span class="acc__label">${esc(t("acc_time"))}</span><span class="acc__val">${secs(s.median_seconds)}</span></div>` : ""}
       <p class="acc__foot">${esc(t("acc_foot"))} · ${esc(acc.run_date || "")} · ${esc(acc.model || "")}</p></div>`;
     requestAnimationFrame(() => $$(".acc__bar i", box).forEach((i) => { i.style.width = i.style.getPropertyValue("--w"); }));
+  }
+
+  function engineName(model) {
+    const m = String(model || "");
+    if (m.startsWith("groq:")) return `${m.slice(5).split("/").pop()} (Groq)`;
+    return m ? "Claude" : "—";
   }
 
   /* ================================================================ examples */
@@ -393,7 +414,7 @@
     const n = result.calc?.results?.length || 0;
     setStage("calc", n ? "done" : "skip", n ? `${n} · ${secs(result.seconds_to_first_figure)}` : t("st_none"));
     if (a.status === "error") setStage("answer", "fail", "");
-    else setStage("answer", "done", `Claude · ${secs(a.timing?.total_s)}`);
+    else setStage("answer", "done", `${engineName(a.model)} · ${secs(a.timing?.total_s)}`);
     const removed = (a.warnings || []).filter((w) => w.kind === "unverified").length;
     const nver = (a.citations || []).filter((c) => c.verified).length;
     if (a.status === "answered" || a.status === "unverified") setStage("verify", nver ? "done" : "fail", `${nver} ${t("st_verified")}${removed ? ` · ${t("st_removed")}` : ""}`);
