@@ -1,0 +1,19 @@
+# secrets
+.env
+.env.*
+!.env.example
+.streamlit/secrets.toml
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+# runtime output
+logs/
+out/
+*.log
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

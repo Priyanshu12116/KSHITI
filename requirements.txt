@@ -1,0 +1,11 @@
+anthropic>=0.70
+cerebras-cloud-sdk
+streamlit>=1.40
+pydantic>=2.8
+rapidfuzz>=3.9
+fpdf2>=2.8
+uharfbuzz>=0.40
+fonttools>=4.50
+qrcode[pil]>=7.4
+python-dotenv>=1.0
+pytest>=8.0
