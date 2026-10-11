@@ -18,7 +18,7 @@
 2. `python -m venv .venv` and activate it (`.venv\Scripts\activate` on Windows, `source .venv/bin/activate` elsewhere)
 3. `pip install -r requirements.txt`
 4. Copy `.env.example` to `.env` and add `ANTHROPIC_API_KEY` and `CEREBRAS_API_KEY`
-5. `streamlit run app/main.py`
+5. `python run.py` and open http://localhost:8000 (the browser opens on its own)
 
 ## Data
 

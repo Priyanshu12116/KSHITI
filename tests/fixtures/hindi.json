@@ -1,0 +1,99 @@
+{
+  "question": "मेरा प्लॉट 200 वर्ग मीटर का है और सामने 9 मीटर चौड़ी सड़क है। आगे कितनी जगह खाली छोड़नी होगी?",
+  "route": {
+    "lang": "hi",
+    "intent": "calculation",
+    "topics": [
+      "front_setback"
+    ],
+    "inputs": {
+      "road_width_m": 9.0,
+      "building_height_m": null,
+      "plot_area_sqm": 200.0,
+      "built_up_area_sqm": null,
+      "frontage_m": null,
+      "building_use": null,
+      "building_type": null
+    },
+    "candidate_rules": [],
+    "source": "rules",
+    "seconds": 0.0,
+    "notes": []
+  },
+  "calc": {
+    "results": [
+      {
+        "key": "front_setback",
+        "label_en": "Front open space (minimum)",
+        "label_hi": "सामने का खुला स्थान (न्यूनतम)",
+        "value": 3.0,
+        "unit": "m",
+        "display": "3.0 m",
+        "rule": "56",
+        "sub_rule": "56(1)(a)",
+        "page": 77,
+        "row_text": "Up to 9.0 meters",
+        "quote": " S.No.            Width of street facing the plot                Front open space Min.\n   (1)                          (2)                                       (3)\n    1.    Up to 9.0 meters                                            3.0 meters\n    2.    More than 9.0 meters and up to 12 meters                    3.6 meters\n    3.    More than 12.0 meters and up to 18 meters                   4.5 meters\n    4.    Above 18 meters                                             6.0 meters",
+        "basis_en": "Street width 9.0 m falls in the row \"Up to 9.0 meters\".",
+        "basis_hi": "सड़क की चौड़ाई 9.0 मीटर, तालिका की पंक्ति \"Up to 9.0 meters\" में आती है।",
+        "assumptions_en": [],
+        "assumptions_hi": [],
+        "verified": true
+      }
+    ],
+    "missing": [],
+    "notes_en": [
+      "Use of the building was not stated: calculated for a residential building."
+    ],
+    "notes_hi": [
+      "भवन का उपयोग नहीं बताया गया: आवासीय भवन मानकर गणना की गई।"
+    ]
+  },
+  "answer": {
+    "question": "मेरा प्लॉट 200 वर्ग मीटर का है और सामने 9 मीटर चौड़ी सड़क है। आगे कितनी जगह खाली छोड़नी होगी?",
+    "lang": "hi",
+    "status": "answered",
+    "text": "सामने कम से कम 3.0 मीटर खुली जगह छोड़नी होगी, क्योंकि सड़क 9.0 मीटर तक चौड़ी है (नियम 56(1)(a))।",
+    "citations": [
+      {
+        "rule": "56",
+        "title": "Residential Buildings",
+        "part": "Part V: General Building Requirements",
+        "page": 77,
+        "quote": " S.No.            Width of street facing the plot                Front open space Min.\n   (1)                          (2)                                       (3)\n    1.    Up to 9.0 meters                                            3.0 meters\n    2.    More than 9.0 meters and up to 12 meters                    3.6 meters\n    3.    More than 12.0 meters and up to 18 meters                   4.5 meters\n    4.    Above 18 meters                                             6.0 meters",
+        "supports": "सामने कम से कम 3.0 मीटर खुली जगह छोड़नी होगी, क्योंकि सड़क 9.0 मीटर तक चौड़ी है (नियम 56(1)(a))।",
+        "verified": true,
+        "is_table": true
+      }
+    ],
+    "warnings": [
+      {
+        "kind": "table",
+        "text_en": "Rule 56 value comes from a table. Check it against the official PDF, page 77.",
+        "text_hi": "नियम 56 का मान तालिका से लिया गया है। आधिकारिक PDF के पृष्ठ 77 से मिलान करें।",
+        "source_url": null
+      }
+    ],
+    "missing_inputs": [],
+    "not_found_reason": "",
+    "suggestion": "",
+    "mentioned_rules": [
+      "56"
+    ],
+    "model": "claude-opus-5-5",
+    "timing": {
+      "router_s": 0.0,
+      "first_token_s": 2.1,
+      "total_s": 5.8
+    },
+    "usage": {
+      "input_tokens": 1200,
+      "output_tokens": 180,
+      "cache_read_tokens": 84000,
+      "cache_write_tokens": 0
+    },
+    "error": ""
+  },
+  "seconds_to_first_figure": 0.0,
+  "seconds_total": 0.0
+}
