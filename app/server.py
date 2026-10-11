@@ -18,7 +18,7 @@ import threading
 from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
-from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
@@ -144,6 +144,16 @@ def ask(body: AskBody) -> StreamingResponse:
 
     return StreamingResponse(stream(), media_type="text/event-stream",
                              headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"})
+
+
+@app.post("/api/slip")
+def slip(result: dict) -> Response:
+    from kshiti.pipeline import Result
+    from kshiti.slip import build_slip
+
+    data, rid = build_slip(Result.model_validate(result))
+    return Response(data, media_type="application/pdf",
+                    headers={"Content-Disposition": f'attachment; filename="Kshiti_{rid}.pdf"'})
 
 
 def _fixture_stream(body: AskBody) -> StreamingResponse:
