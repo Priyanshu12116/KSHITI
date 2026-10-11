@@ -62,7 +62,7 @@ class KshitiPDF(FPDF):
         self.set_text_shaping(True)
         self.set_fallback_fonts(["deva"], exact_match=False)
         self.set_title(f"Kshiti {title} {receipt}")
-        self.set_author("Kshiti · THETA172")
+        self.set_author("Kshiti · THETA1728")
         self.set_creator("Kshiti · Bhumi Vikas Sahayak")
         self.alias_nb_pages()
 
@@ -122,7 +122,7 @@ class KshitiPDF(FPDF):
                         "केवल जानकारी हेतु; अंतिम निर्णय सक्षम प्राधिकारी का।", new_x=XPos.LMARGIN, new_y=YPos.NEXT)
         self.set_font("sans", "", 7)
         self.set_text_color(*G500)
-        self.cell(0, 3.6, "Kshiti · THETA172 · open source (MIT)")
+        self.cell(0, 3.6, "Kshiti · THETA1728 · open source (MIT)")
         self.cell(0, 3.6, f"Page {self.page_no()}/{{nb}}", align="R")
 
     def _qr(self) -> io.BytesIO:

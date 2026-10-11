@@ -1,7 +1,7 @@
 # KSHITI (क्षिति) — Build Phases
 
 **Track 1 · Bhumi Vikas Sahayak** · Claude Impact Lab × Cerebras, Bhopal · 11-Oct-2026
-**Solo:** Priyanshu Sharma · THETA172 · **Repo:** github.com/Priyanshu12116/KSHITI · **Local:** `D:\KSHITI`
+**Solo:** Priyanshu Sharma · THETA1728 · **Repo:** github.com/Priyanshu12116/KSHITI · **Local:** `D:\KSHITI`
 **Hard deadline:** form submitted before **5:00 PM**. Times below assume "go" at **1:20 PM**.
 
 **User:** a building-permission clerk at the Bhopal Municipal Corporation counter.
@@ -92,7 +92,7 @@
 ├──────────────────────────────────────────────────────────────┤
 │ Rules: MP Bhumi Vikas Rules 2012, consolidated 06-Mar-2025 · │ footer (every page)
 │ fingerprint a1b2c3 · For information only; the competent     │
-│ authority decides. · Kshiti by THETA172 · Page 1/1           │
+│ authority decides. · Kshiti by THETA1728 · Page 1/1           │
 └──────────────────────────────────────────────────────────────┘
 ```
 
@@ -126,7 +126,7 @@
 - [ ] Organiser data copied in (rules JSONL, page text, English PDF, sample questions)
 - [ ] Fonts: Tillana, Anek Devanagari, Inter, Noto Sans Devanagari (all OFL)
 - [ ] Logos: emblem (Wikimedia SVG), MP Govt, BMC → SVG where an official one exists, otherwise a high-resolution PNG (cleaned, **not redrawn**) → **you approve them**
-- [ ] `.venv` + `requirements.txt` (anthropic, cerebras-cloud-sdk, streamlit, pydantic, rapidfuzz, fpdf2, uharfbuzz, qrcode, python-dotenv, pytest), `.env.example`, `.gitignore`, MIT `LICENSE` (Priyanshu Sharma · THETA172)
+- [ ] `.venv` + `requirements.txt` (anthropic, cerebras-cloud-sdk, streamlit, pydantic, rapidfuzz, fpdf2, uharfbuzz, qrcode, python-dotenv, pytest), `.env.example`, `.gitignore`, MIT `LICENSE` (Priyanshu Sharma · THETA1728)
 - [ ] **You:** put `ANTHROPIC_API_KEY` and `CEREBRAS_API_KEY` into `D:\KSHITI\.env`
 
 **Done when:** both APIs answer a test call, and the first commit is pushed.
@@ -201,7 +201,7 @@
   - 3-command run steps, architecture diagram
   - accuracy table, known limits
   - data sources, logo permission note
-  - credits (Priyanshu Sharma · THETA172)
+  - credits (Priyanshu Sharma · THETA1728)
 - [ ] Project summary PDF generated with the same template → `docs/Kshiti_Summary.pdf`
 - [ ] Search for leaked keys, check `.env` isn't committed, make the repo **public**, test the run steps on a fresh clone
 - [ ] **Submit the Google Form before 5:00 PM**

@@ -52,7 +52,7 @@ def accuracy_text() -> str:
 
 def main() -> None:
     now = datetime.now(IST)
-    pdf = SummaryPDF("THETA172 · TRACK 1", now, rulebook_fingerprint(), "Project summary · परियोजना सारांश")
+    pdf = SummaryPDF("THETA1728 · TRACK 1", now, rulebook_fingerprint(), "Project summary · परियोजना सारांश")
     pdf.add_page()
 
     pdf.label("In one line", "एक पंक्ति में")
@@ -105,7 +105,7 @@ def main() -> None:
 
     pdf.label("Run it · Team", "चलाएँ · टीम")
     pdf.box(f"{REPO}\npip install -r requirements.txt · add keys to .env · python run.py · http://localhost:8000\n"
-            "Team THETA172 · Priyanshu Sharma (solo) · Track 1, Claude Impact Lab × Cerebras, Bhopal, 11-10-2026 · MIT License",
+            "Team THETA1728 · Priyanshu Sharma (solo) · Track 1, Claude Impact Lab × Cerebras, Bhopal, 11-10-2026 · MIT License",
             font=("sans", "", 9), fill=G100, shadow=False, lh=4.8)
 
     out = ROOT / "docs" / "Kshiti_Summary.pdf"

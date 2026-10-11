@@ -5,7 +5,7 @@
 | | |
 |---|---|
 | **Track** | Track 1 · Bhumi Vikas Sahayak · Claude Impact Lab × Cerebras, Bhopal, 11 October 2026 |
-| **Team** | THETA172 |
+| **Team** | THETA1728 |
 | **Members** | Priyanshu Sharma (solo) |
 | **The one user** | A building-permission clerk at the Bhopal Municipal Corporation counter |
 | **Live demo** | **https://kshiti-two.vercel.app** (Claude Opus 5.5 answers; limited to 30 questions per visitor per 10 minutes) |
@@ -154,4 +154,4 @@ API keys are read from `.env` (not committed; see `.env.example`). No keys or se
 
 MIT, see [LICENSE](LICENSE). Offered to the Government of Madhya Pradesh through MPSeDC.
 
-Built by **Priyanshu Sharma · THETA172**.
+Built by **Priyanshu Sharma · THETA1728**.
