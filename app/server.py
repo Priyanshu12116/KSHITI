@@ -17,7 +17,7 @@ import queue
 import threading
 from pathlib import Path
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
@@ -136,10 +136,35 @@ def _dump(obj):
     return obj.model_dump(mode="json") if hasattr(obj, "model_dump") else obj
 
 
+RATE_LIMIT = int(os.environ.get("KSHITI_RATE_LIMIT", "30"))      # questions per visitor per window
+RATE_WINDOW = 600                                                  # seconds
+_hits: dict[str, list[float]] = {}
+
+
+def _over_limit(request: Request) -> bool:
+    """Simple per-visitor limit so a public deployment cannot run up the API bill."""
+    import time
+
+    ip = (request.headers.get("x-forwarded-for") or (request.client.host if request.client else "?")).split(",")[0].strip()
+    now = time.time()
+    recent = [t for t in _hits.get(ip, []) if now - t < RATE_WINDOW]
+    if len(recent) >= RATE_LIMIT:
+        _hits[ip] = recent
+        return True
+    recent.append(now)
+    _hits[ip] = recent
+    if len(_hits) > 5000:
+        _hits.clear()
+    return False
+
+
 @app.post("/api/ask")
-def ask(body: AskBody) -> StreamingResponse:
+def ask(body: AskBody, request: Request) -> StreamingResponse:
     if body.fixture:
         return _fixture_stream(body)
+    if _over_limit(request):
+        return JSONResponse({"message": "Too many questions from this computer in the last 10 minutes. Please wait a few minutes."},
+                            status_code=429)
 
     from kshiti.pipeline import run
 

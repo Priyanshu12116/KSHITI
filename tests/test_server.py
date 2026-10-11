@@ -38,3 +38,11 @@ def test_fixtures_are_not_available_outside_developer_mode():
 
 def test_ask_validates_input():
     assert client.post("/api/ask", json={"question": ""}).status_code == 422
+
+
+def test_public_rate_limit(monkeypatch):
+    import app.server as srv
+
+    monkeypatch.setattr(srv, "RATE_LIMIT", 0)
+    r = client.post("/api/ask", json={"question": "front open space for 10 m road?"})
+    assert r.status_code == 429 and "Too many" in r.json()["message"]

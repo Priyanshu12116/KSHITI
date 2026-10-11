@@ -1,0 +1,16 @@
+.venv
+.env
+out
+logs
+tests
+tools
+docs/participant_guide.pdf
+**/__pycache__
+.pytest_cache
+app/static/fonts/AnekDevanagari.ttf
+app/static/fonts/Inter.ttf
+app/static/fonts/Inter-Italic.ttf
+app/static/fonts/Tillana-Regular.ttf
+app/static/fonts/Tillana-Medium.ttf
+app/static/fonts/Tillana-SemiBold.ttf
+app/static/fonts/Tillana-ExtraBold.ttf

@@ -241,7 +241,11 @@
         body: JSON.stringify({ question, fixture: opts.fixture || null }),
         signal: state.controller.signal,
       });
-      if (!resp.ok || !resp.body) throw new Error(`HTTP ${resp.status}`);
+      if (!resp.ok || !resp.body) {
+        let msg = `HTTP ${resp.status}`;
+        try { msg = (await resp.json()).message || msg; } catch { /* not JSON */ }
+        throw new Error(msg);
+      }
       await readStream(resp.body, onEvent);
     } catch (err) {
       if (err.name !== "AbortError") renderError(String(err.message || err));
