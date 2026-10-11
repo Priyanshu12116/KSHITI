@@ -8,6 +8,7 @@
 | **Team** | THETA172 |
 | **Members** | Priyanshu Sharma (solo) |
 | **The one user** | A building-permission clerk at the Bhopal Municipal Corporation counter |
+| **Live demo** | **https://kshiti-two.vercel.app** (Claude Opus 5.5 answers; limited to 30 questions per visitor per 10 minutes) |
 | **The one workflow** | A citizen asks → the clerk types the question in English or Hindi → a cited answer in under a minute → a printable PDF slip for the citizen |
 
 ![Kshiti home screen](docs/screenshots/02_home.png)
@@ -74,6 +75,8 @@ The interface shows these scores in its "Measured accuracy" panel. 85 unit tests
 5. `python run.py`, then open http://localhost:8000
 
 Optional: `pytest` runs the tests; `python eval/run_eval.py` measures accuracy.
+
+**Deploy (Vercel):** `vercel link`, add `ANTHROPIC_API_KEY` and `GROQ_API_KEY` with `vercel env add`, then `vercel deploy --prod`. `vercel.json` and `api/index.py` are included; `KSHITI_RATE_LIMIT` sets questions per visitor per 10 minutes (default 30).
 
 ## What works and what does not
 
