@@ -2,12 +2,12 @@
 
 ## Before recording (5 minutes)
 
-1. A working key in `.env`: `GROQ_API_KEY` (used at the event) or `ANTHROPIC_API_KEY`. Do not ask questions in the browser while `eval/run_eval.py` is running: the free Groq quota is 8,000 tokens per minute.
+1. `.env` has `ANTHROPIC_API_KEY` (Claude Opus 5.5 answers) and `GROQ_API_KEY` (free router in place of Cerebras). Do not ask questions in the browser while `eval/run_eval.py` is running.
 2. `python run.py`. Open http://localhost:8000 in a fresh browser window (the opening animation plays once per session; open a new window to see it again).
-3. Wait one minute after any other use, so the free quota is fresh; each answer then takes a few seconds.
+3. Ask the headline question once before recording, so Claude has the rulebook in its cache; answers then take about 10 to 15 s, and the figures appear at once.
 4. Screen at 1366×768 or 1920×1080, browser zoom 100%, notifications off.
 
-> Say which model answers: during the event Kshiti runs on **gpt-oss-120b on Groq** (the interface shows it in the progress bar and the "How an answer is made" panel). The Claude engine is in the code and is used automatically when an Anthropic key is set. Do not call the Groq answers "Claude".
+> Say which models run: **Claude Opus 5.5** writes the cited answers; **gpt-oss-20b on Groq** (free inference) reads the question in place of Cerebras. The progress bar shows both. If the Anthropic key stops working, Kshiti falls back to gpt-oss-120b on Groq and the labels change with it.
 
 ## 2-minute recording (record at 16:00)
 
@@ -15,7 +15,7 @@
 |---|---|---|
 | 0:00–0:10 | Opening animation | "This is Kshiti, for the building-permission clerk at the Bhopal Municipal Corporation." |
 | 0:10–0:20 | Home screen, point at the four guarantee cards | "A citizen asks a question. The clerk needs a correct answer in a minute, with the rule to show." |
-| 0:20–0:50 | Click the first example (200 sq m, 9 m road). Point at the figure cards as they appear, then the answer | "The figures appear first. They are calculated in code from tables checked against the official PDF: 3 metres in front, 250 square metres of built-up area, 12.5 metres height, Rs 3,250 in fees. Then the language model, here gpt-oss-120b on Groq, writes the answer from the rule text and quotes it." |
+| 0:20–0:50 | Click the first example (200 sq m, 9 m road). Point at the figure cards as they appear, then the answer | "The figures appear first. They are calculated in code from tables checked against the official PDF: 3 metres in front, 250 square metres of built-up area, 12.5 metres height, Rs 3,250 in fees. Then Claude writes the answer from the 106 rules and cites the exact text." |
 | 0:50–1:05 | Scroll to the source cards; click "Open PDF at page 77" | "Every quote is the official text, checked word for word. The matching table row is highlighted, and this opens the PDF at the right page." |
 | 1:05–1:20 | Click the Hindi example | "Questions in Hindi get answers in Hindi." |
 | 1:20–1:32 | Click "How do I pay my property tax online?" | "When the rules are silent, Kshiti says so. It does not guess." |

@@ -35,7 +35,7 @@ class Route(BaseModel):
     topics: list[str] = Field(default_factory=list)
     inputs: CalcInputs = Field(default_factory=CalcInputs)
     candidate_rules: list[str] = Field(default_factory=list)
-    source: Literal["cerebras", "rules"] = "rules"
+    source: Literal["cerebras", "groq", "rules"] = "rules"
     seconds: float = 0.0
     notes: list[str] = Field(default_factory=list)
 
@@ -175,9 +175,23 @@ def _numbers_in(text: str) -> set[float]:
     return {float(x) for x in re.findall(r"\d+(?:\.\d+)?", text.translate(DEV_DIGITS))}
 
 
+def _key(var: str) -> str:
+    k = os.environ.get(var, "")
+    return "" if not k or k.startswith("dummy") else k
+
+
+def router_provider() -> str:
+    """Cerebras when its key is set; otherwise free inference on Groq; otherwise the local reader."""
+    if _key("CEREBRAS_API_KEY"):
+        return "cerebras"
+    if _key("GROQ_API_KEY"):
+        return "groq"
+    return "rules"
+
+
 def cerebras_route(question: str) -> Route | None:
-    key = os.environ.get("CEREBRAS_API_KEY", "")
-    if not key or key.startswith("dummy"):
+    key = _key("CEREBRAS_API_KEY")
+    if not key:
         return None
     try:
         from cerebras.cloud.sdk import Cerebras
@@ -193,7 +207,44 @@ def cerebras_route(question: str) -> Route | None:
         seconds = round(time.perf_counter() - t0, 2)
     except Exception:  # noqa: BLE001 - any failure falls back to the rule-based route
         return None
+    return _route_from(question, data, seconds, "cerebras")
 
+
+GROQ_ROUTER_MODEL = os.environ.get("KSHITI_GROQ_ROUTER_MODEL", "openai/gpt-oss-20b")
+
+
+def groq_route(question: str) -> Route | None:
+    """The same router on free inference (Groq, gpt-oss-20b), used when there is no Cerebras key."""
+    key = _key("GROQ_API_KEY")
+    if not key:
+        return None
+    try:
+        import httpx
+
+        t0 = time.perf_counter()
+        r = httpx.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"},
+            json={
+                "model": GROQ_ROUTER_MODEL,
+                "messages": [{"role": "system", "content": _router_system()}, {"role": "user", "content": question}],
+                "response_format": {"type": "json_schema",
+                                    "json_schema": {"name": "route", "strict": True, "schema": ROUTER_SCHEMA}},
+                "reasoning_effort": "low",
+                "max_completion_tokens": 900,
+                "temperature": 0,
+            },
+            timeout=TIMEOUT_S + 2,
+        )
+        r.raise_for_status()
+        data = json.loads(r.json()["choices"][0]["message"]["content"])
+        seconds = round(time.perf_counter() - t0, 2)
+    except Exception:  # noqa: BLE001 - any failure falls back to the rule-based route
+        return None
+    return _route_from(question, data, seconds, "groq")
+
+
+def _route_from(question: str, data: dict, seconds: float, source: str) -> Route:
     present = _numbers_in(question)
     sqft = re.search(AREA_SQFT, question, re.I) is not None
 
@@ -219,7 +270,7 @@ def cerebras_route(question: str) -> Route | None:
         lang=data.get("language", detect_lang(question)), intent=data.get("intent", "unclear"),
         topics=[t for t in data.get("topics", []) if t in ALL_TOPICS], inputs=inputs,
         candidate_rules=[r for r in data.get("candidate_rules", []) if r in known][:4],
-        source="cerebras", seconds=seconds,
+        source=source, seconds=seconds,
     )
 
 
@@ -227,7 +278,7 @@ def route(question: str) -> Route:
     """Cerebras first; the rule-based extractor fills gaps and is the fallback."""
     t0 = time.perf_counter()
     base = rule_based_route(question)
-    fast = cerebras_route(question)
+    fast = cerebras_route(question) or groq_route(question)
     if fast is None:
         base.seconds = round(time.perf_counter() - t0, 3)
         return base

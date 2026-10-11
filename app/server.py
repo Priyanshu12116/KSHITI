@@ -53,6 +53,12 @@ def _configured(var: str) -> bool:
     return bool(v) and not v.startswith("dummy")
 
 
+def _router() -> str:
+    from kshiti.router import router_provider
+
+    return router_provider()
+
+
 def _engine() -> str:
     from kshiti.pipeline import provider
 
@@ -91,6 +97,7 @@ def meta() -> JSONResponse:
         "amendments": load_amendments(),
         "services": {
             "engine": _engine(),
+            "router": _router(),
             "groq": _configured("GROQ_API_KEY"),
             "groq_model": os.environ.get("KSHITI_GROQ_MODEL", "openai/gpt-oss-120b"),
             "claude": _configured("ANTHROPIC_API_KEY"),

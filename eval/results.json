@@ -1,6 +1,6 @@
 {
-  "run_date": "11-10-2026 15:35",
-  "model": "openai/gpt-oss-120b on Groq",
+  "run_date": "11-10-2026 15:54",
+  "model": "claude-opus-5-5",
   "offline": false,
   "summary": {
     "rule_hit": 15,
@@ -12,13 +12,13 @@
     "figure_total": 5,
     "lang_hit": 17,
     "lang_total": 17,
-    "quotes_verified": 37,
-    "quotes_total": 37,
+    "quotes_verified": 107,
+    "quotes_total": 107,
     "invented_rules": 0,
     "amendment_hit": 1,
     "amendment_total": 1,
     "errors": 0,
-    "median_seconds": 29.6
+    "median_seconds": 12.8
   },
   "questions": [
     {
@@ -28,25 +28,27 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "56"
+        "56",
+        "103"
       ],
       "mentioned_rules": [
-        "56"
+        "56",
+        "103"
       ],
       "calc": [
         "Front open space (minimum): 3.6 m"
       ],
-      "answer": "3.6 m, because the street is more than 9.0 meters and up to 12 meters wide (Rule 56(1)(a)).",
-      "citations": 2,
-      "verified": 2,
+      "answer": "You must leave at least 3.6 m of open space at the front. This is because your street is 10 m wide, which is more than 9 m and up to 12 m, under Rule 56(1)(a).\n\nThis table applies to your house because it will be 9 m tall. The rule covers every Residential Building having height up to 12.5 meters, facing street. Such a building shall have a front open space mentioned below and such open space shall form an integral part of the site.\n\nYour 10 m street falls in this row of the table: More than 9.0 meters and up to 12 meters — 3.6 meters. A 10 m street is clearly within this row and is not near either boundary. Up to 9 m, the requirement would be 3.0 m. Above 12 m, it would be 4.5 m.\n\nThe rule for narrow streets in Rule 56(1)(b) does not apply to you. That rule only covers existing developed areas with streets less than 6.0 meters in width, and your street is 10 m wide.\n\nThese figures can be overridden by the city's development plan. Under Rule 103, the norms and regulations applicable in the plan area shall be such as prescribed in the relevant development plan.",
+      "citations": 4,
+      "verified": 4,
       "warnings": [
         "table"
       ],
       "error": "",
-      "seconds": 2.93,
-      "router": "rules",
-      "router_seconds": 0.006,
-      "first_figure_s": 0.03,
+      "seconds": 8.28,
+      "router": "groq",
+      "router_seconds": 0.89,
+      "first_figure_s": 0.9,
       "rule_ok": true,
       "false_not_found": false,
       "figures_ok": true,
@@ -64,17 +66,23 @@
       ],
       "mentioned_rules": [
         "17(a)",
-        "17(b)"
+        "17(b)",
+        "17",
+        "17(c)",
+        "17(d)",
+        "17(e)",
+        "17(f)",
+        "17-a"
       ],
       "calc": [],
-      "answer": "0.40 hectare, because the minimum plot size for a farm house is specified as 0.40 hectare (Rule 17(a)). 0.10, because the maximum floor area ratio is limited to 0.10 (Rule 17(b)).",
-      "citations": 2,
-      "verified": 2,
+      "answer": "Under Rule 17(a) the plot must be at least 0.40 hectare, and under Rule 17(b) the FAR can be at most 0.10. Rule 17 says that in any area designated for agricultural use, Farm Houses shall be permissible subject to the following conditions and such other conditions as may be imposed by the authority. The two conditions asked about are: (a) Minimum size of the plot shall be 0.40 hectare; (b) Maximum F.A.R. shall be 0.10.\n\nRule 17 also sets these other conditions for a farm house:\nRule 17(c): The maximum height of structure shall be 7.5 meters with sloping roof.\nRule 17(d): the plot must have a minimum of 100 live trees per hectare on the plot before the application for building constructions is made to the Authority.\nRule 17(e): it must be accessible by road having width not less than 7.5 meters.\nRule 17(f): it must have minimum 7.50 meters open space (MOS) from all sides.\n\nIf the citizen wants tourist activities on the land rather than only a farm house, Rule 17-a (inside the Rule 17 document) applies instead. It needs a bigger plot: Minimum Size of the plot shall be 1.00 hectare.",
+      "citations": 5,
+      "verified": 5,
       "warnings": [],
       "error": "",
-      "seconds": 10.23,
-      "router": "rules",
-      "router_seconds": 0.001,
+      "seconds": 12.2,
+      "router": "groq",
+      "router_seconds": 0.65,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -92,17 +100,18 @@
         "23"
       ],
       "mentioned_rules": [
-        "23"
+        "23",
+        "21"
       ],
       "calc": [],
-      "answer": "The development permission remains valid for up to three years from the date of grant (Rule 23(1)). It can be revalidated for two consecutive one‑year terms, after which a fresh application is required (Rule 23(2)).",
-      "citations": 2,
-      "verified": 2,
+      "answer": "Your development permission is valid for 3 years from the date it was granted. You can get it revalidated twice, for 1 year each time. That makes 5 years at most: 3 + 1 + 1 = 5. Since it was granted in 2023, the first 3 years end on the same date in 2026. With both revalidations it can last until the same date in 2028, at the latest.\n\nThis comes from Rule 23(1): in case of development permission under Section 30 of Madhya Pradesh Nagar Tatha Gram Nivesh Adhiniyam, 1973 the sanction once accorded shall remain valid up to three years.\n\nRule 23(2) covers renewal: Such revalidation may be permitted for two consecutive terms of one year each, after which proposals shall have to be submitted afresh. The 5-year total is a hard limit, because the limitation of five years shall not be relaxed.\n\nThe fee depends on when you apply. If you apply before the permission expires, there is no fee: no fee shall be charged if the application for revalidation is received before the expiry of its validity. If you apply after the 3 years are over, the Authority shall charge a permission fee equal to the fee prescribed under clause (a) of sub-rule (3) of rule 21 before revalidating the same.\n\nIf work on the project starts while the permission is still valid, you do not need to renew at all. Under Rule 23(3), in case execution of the project begins during the validity of the permission granted under Section 30 of the Act, the permission shall not be deemed to lapse thereafter at any time and no revalidation shall be required.",
+      "citations": 3,
+      "verified": 3,
       "warnings": [],
       "error": "",
-      "seconds": 18.62,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 12.75,
+      "router": "groq",
+      "router_seconds": 0.81,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -116,20 +125,24 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "28"
+        "28",
+        "35",
+        "26-B"
       ],
       "mentioned_rules": [
-        "28"
+        "28",
+        "35",
+        "26-B"
       ],
       "calc": [],
-      "answer": "0 days, because the authority failed to refuse the application within the period prescribed in sub‑section (5) of Section 30 of the Act, the permission is deemed to have been sanctioned (Rule 28). This deemed sanction does not permit any construction that violates the Act, the Development Plan, Zoning Plan or any other law (Rule 28).",
-      "citations": 1,
-      "verified": 1,
+      "answer": "If the Authority does not send a written refusal within the time limit set by law, the permission is treated as granted (deemed sanction). This comes from Rule 28: if the Authority fails to intimate in writing its refusal of sanction to the applicant within the period prescribed in sub-section (5) of Section 30 of the Act, the permission shall be deemed to have been sanctioned. Rule 28 does not state the period itself. Rule 35(3) refers to it as the period of sixty days under sub-section (5) of section 30 of the Act.\n\nThere are three limits to this.\n\nFirst, a deemed sanction does not cover anything that breaks the rules. Under Rule 28, nothing shall be construed to authorize any person to do anything in contravention of provisions of the Act and Rules made thereunder and against the provisions of Development Plan or Zoning Plan, or against the terms of lease and titles of the land or against the provisions of any other law operating on the site of the work.\n\nSecond, the rule is different if the citizen applied through an authorised Architect or Structural Engineer instead of the Authority. The Rule 28 proviso says that in case of lapse of time in deciding application seeking building permission from authorised Architect/Structural Engineer, it shall not be deemed that the requisite permission has been granted. Such an architect or engineer must still issue the permission within a period of not exceeding 30 days under Rule 26-B(1).\n\nThird, the time taken by an Art Commission does not count towards the 60 days. For buildings it reviews under Rule 35, the time taken by the commission in submitting its recommendations shall not be taken into account while computing the period of sixty days.\n\nSo before telling the citizen the permission is deemed granted, check who received the application and when.",
+      "citations": 4,
+      "verified": 4,
       "warnings": [],
       "error": "",
-      "seconds": 31.81,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 9.76,
+      "router": "groq",
+      "router_seconds": 0.72,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -149,16 +162,16 @@
         "52"
       ],
       "calc": [],
-      "answer": "The balcony must be at least 2.5 m below a low‑voltage overhead line and at least 1.2 m away horizontally, because the line is low and medium voltage (Rule 52(1)(a)).",
+      "answer": "A balcony must stay at least 2.5 m away vertically and 1.2 m away horizontally from a low-voltage overhead line. This is Rule 52(1), row (a) of the table, which covers Low and Medium voltage lines and service lines. If the applicable Electricity Rules set a larger distance, the larger one applies, because the minimum distance is as mentioned herein below or that mentioned in the applicable Electricity Rules, whichever is more.\n\nThe rule names balconies directly: No verandah, balcony or the like shall be allowed to be erected or re-erected or any additions or alterations made to a building which violates this rule.\n\nMeasure the distances as Rule 52(2) says: the clearance is measured from the maximum sag for vertical clearance and from maximum deflection due to wind pressure for horizontal clearance. So the 2.5 m is taken from the line's lowest sag point, and the 1.2 m from the line's position when the wind pushes it furthest towards the building.",
       "citations": 2,
       "verified": 2,
       "warnings": [
         "table"
       ],
       "error": "",
-      "seconds": 26.79,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 6.39,
+      "router": "groq",
+      "router_seconds": 0.52,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -175,22 +188,24 @@
       "cited_rules": [
         "18",
         "26",
-        "26-B"
+        "14"
       ],
       "mentioned_rules": [
         "18",
         "26",
-        "26-B"
+        "14"
       ],
       "calc": [],
-      "answer": "18, because the architect, structural engineer, engineer, supervisor or town planner must prepare and duly sign any plan and indicate their name, address, qualifications and license number (Rule 18). 26(A), because a registered architect is competent to carry out the work related to building permission and is entitled to submit the plans (Rule 26(A)). 26(D), because a licensed supervisor may submit all plans for residential buildings on plots up to 200 sq m and up to two stories or 7.5 m height (Rule 26(D)). 26-B(5), because an authorised architect or structural engineer who prepared the plans must place their license number, name, seal, registration number and signature on the map (Rule 26-B(5)).",
-      "citations": 4,
-      "verified": 4,
-      "warnings": [],
+      "answer": "Your plans must be prepared and signed by a licensed architect, structural engineer, engineer, supervisor or town planner, and you must sign them as well. Which of these professionals can handle your building depends on your plot size and the building's height.\n\nUnder Rule 18, the architect, structural engineer, engineer, supervisor or town planner, as the case may be, shall prepare and duly sign any plan and shall indicate his name, address, qualifications and license number and it's validity. The plans shall also be duly signed by the owner/applicant indicating his address. An architect does not need a licence from the Authority. Under Rule 26(2), an architect who is duly registered with the council of Architect under the Architects Act, 1972 shall not require any separate license from Director / Development Authority/Local Authorities.\n\nRule 26(9) sets what each professional can submit:\n\nAn architect can submit all plans and information connected with permission for all building irrespective of size and height (Rule 26(9)(A)(a)).\n\nA licensed structural engineer can submit all plans and information connected with permission for residential buildings on plots up to 500 Sq. m. and up to three stories or 11 m. in height. (Rule 26(9)(B)(i))\n\nA licensed engineer is listed for all plans and information connected with residential building on plot up to 300 sq. meter and up to two stories or 7.5 meter in height. (Rule 26(9)(C)(i)). However, the High Court struck down a highlighted part of Rule 26(9)(C) and held that the highlighted part of Rule 26(9)(A) would apply proprio vigore to Engineers as in case of Architects. The text here does not show which words were highlighted, so the exact limit for engineers needs to be confirmed.\n\nA licensed supervisor can submit all plans and related information connected with the permission for residential buildings on plots up to 200 sq. m. and up to two stories or 7.5 meters height (Rule 26(9)(D)(i)).\n\nA licensed town planner can submit all plans and related information connected with permission for development irrespective of the size of land (Rule 26(9)(E)(a)).\n\nFor a group or agency of such professionals, the qualification and competence of work shall be equivalent to the highest competency of individual in the group or agency. (Rule 26(9)(H))\n\nThe application can go to the Authority itself or to an authorised architect or structural engineer. Under Rule 14(1), the citizen shall make an application in writing to the authority or authorised Architect/Structural Engineer to issue building permission. If you file with an authorised architect or structural engineer, the prescribed fees shall be paid into the treasury/bank account of the Authority in advance and its receipt shall be accompanied with the application.",
+      "citations": 11,
+      "verified": 11,
+      "warnings": [
+        "table"
+      ],
       "error": "",
-      "seconds": 30.7,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 14.33,
+      "router": "groq",
+      "router_seconds": 0.6,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -204,22 +219,34 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
+        "14",
         "16",
-        "14"
+        "21",
+        "15",
+        "83",
+        "19",
+        "12"
       ],
       "mentioned_rules": [
+        "14",
         "16",
-        "14"
+        "21",
+        "88",
+        "15",
+        "83",
+        "19",
+        "12-A",
+        "12"
       ],
       "calc": [],
-      "answer": "The application must be accompanied by the application fee, a key plan, site plans, the subdivision/layout plan approved under section 30 of the Madhya Pradesh Nagar Tatha Gram Nivesh Adhiniyam 1973, building plans, service plans, a project report outlining the proposed development, documents proving ownership or any legal right in relation to the site, proof of authorization by the owner if the applicant is not the owner, parking plans with calculations, and a certificate of supervision as prescribed in sub‑rule (2)‑(12) of Rule 16 (Rule 16). All these documents, plans and statements must be submitted in quadruplicate, with an electronic copy prepared in the software directed by the Authority (Rule 14).",
-      "citations": 2,
-      "verified": 2,
+      "answer": "The building permission form is Appendix A-2 and A-2(1). It goes with the documents, plans and fee receipt set out in Rule 14(1), Rule 14(2) and Rule 16. Under Rule 14(1), the citizen must apply in the forms given in Appendix A-1 (In case of development permission) or in Appendix A-2 and A-2(1) (In case of building permission) with documents and necessary fees specified. Such application shall be accompanied by documents, plans and statements in quadruplicate. The plans shall be in ammonia print or white print. In addition an electronic copy shall be submitted. If the Corporation uses an online system, application, plan, document and statement shall only be obtained through the software being used by the Authority.\n\nThe basic list is in Rule 16(1)(b). The Appendix A-2 application shall be accompanied with application fee, Key Plan, Site Plans, Sub Division/Layout Plan approved under section 30 of Madhya Pradesh Nagar Tatha Gram Nivesh Adhiniyam 1973, Building Plans, Service Plans, Project Report out lining the proposed development, documents showing proof of ownership or of any legal right in relation to the site. It also needs Proof of the applicant having been authorized by the owner to submit application (if applicant is not the owner), parking plans along with parking calculations and certificate of supervision.\n\nThe fee receipt is required by Rule 21(1). An attested copy of receipt of such payment shall be attached with the application. An application received without such receipt shall not be deemed valid and hence rejected. The application fee is Rs 1.00 per Square meter of the proposed built-up area.\n\nProof of title is set out in Rule 16(11). It means an attested copy of the sale deed, lease deed, or any other document under which right, title or interest in land or plot is claimed and an attested copy of the khasra plan (patwari aks) and khatauni record, if any. It also covers other document that may be considered necessary by the Authority. In case of lease hold plots, the lessee shall have to prove that he is entitled to construct on the lease hold plot, and authorisation of owner, if applicant is not the owner. The citizen does not bring the Nazul NOC. If the land is registered in the applicant's name in the revenue records, Authority shall write to the Nazul Officer within seven days of receipt of application, to issue Nazul NOC within a period of 30 days.\n\nCertificates are needed under several rules:\n\nRule 16(8)(i): specifications giving type and grade of materials being used, duly signed by the licensed Architect, Structural Engineer, Engineer, Supervisor, Town Planner, Fire Engineer or Lift Engineer.\n\nRule 16(9): a supervision certificate in form given in Appendix-B.\n\nRule 14(2): a certificate duly signed by Structural Engineer/Architect/Engineer/Supervisor of the building stating that all the provisions of Rule 88 (for Earthquake prone areas) has been complied with.\n\nRule 15: where the land is in an earthquake-prone area, the certificates as indicated in Appendix A-3, A-4, A-5, A-6, A-7 and A-8 shall be submitted duly signed by the Developer, Architect and Structural Engineer.\n\nSome cases need more:\n\nHigh-rise buildings, Rule 16(10): a certificate about structural stability duly signed by a structural engineer along with all relevant calculations shall accompany the application.\n\nBuildings needing Art Commission approval, Rule 16(12): such approval shall accompany the application.\n\nBuildings with a lift, escalator or moving walk, Rule 83(1): Every owner shall furnish details related to installation of lift, escalator or moving walk along with building permission application in Appendix A- 2(A).\n\nAlterations, Rule 19: only such plans and statements, as may be necessary, shall accompany the application.\n\nResidential plots up to 186 sq m can use instant/deemed approval under Rule 12-A (in the Rule 12 document). The applicant shall have to submit the application in the prescribed form in Appendix-A-2(2) and affidavit in Appendix-A-2(3) for instant/deemed building approval.\n\nWhat the key plan, site plan and building plan must show is detailed in Rule 16(3), 16(4) and 16(6).",
+      "citations": 18,
+      "verified": 18,
       "warnings": [],
       "error": "",
-      "seconds": 31.11,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 20.9,
+      "router": "groq",
+      "router_seconds": 0.54,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -233,18 +260,23 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
+        "21",
+        "2"
+      ],
+      "mentioned_rules": [
         "21"
       ],
-      "mentioned_rules": [],
       "calc": [],
-      "answer": "The building permission fee for a residential house is Rs 1.00 per square metre of the proposed built‑up area, and it must be paid before the permission is issued.",
-      "citations": 2,
-      "verified": 2,
-      "warnings": [],
+      "answer": "The fee depends on the house's proposed built-up area, so the exact figure needs that area. Two separate fees apply under Rule 21.\n\nThe first is the application fee under Rule 21(2)(ii). It is Rs 1.00 per Square meter of the proposed built-up area, and the application fee shall not be refunded in any case. The application must also carry an attested copy of receipt of such payment.\n\nThe second is the permission fee, paid before the permission is issued. For a house that is not a high rise building, Rule 21(3)(b), Item 1 (A building intended to be used exclusively as residence) sets these slabs by built-up area:\n0 to 75 sq m: Rs 750\n76 to 125 sq m: Rs 1,250\n126 to 200 sq m: Rs 2,000\n201 to 300 sq m: Rs 3,000\n301 to 400 sq m: Rs 4,000\n401 to 600 sq m: Rs 6,000\n601 to 750 sq m: Rs 7,500\n751 to 1,000 sq m: Rs 10,000\n1,001 to 1,250 sq m: Rs 12,500\n1,251 to 1,500 sq m: Rs 15,000\n1,501 to 2,000 sq m: Rs 20,000\n2,001 to 2,500 sq m: Rs 25,000\nAbove 2,500 sq m: Rs 50,000\n\nFor a residential high rise building, Rule 21(3)(c), Item 1 sets the permission fee at Rs. 10.00 per square meter of the built up area. The rules define a high rise building as one which consists of more than ten stories; or which has a height of more than 30 meters.\n\nExample: an ordinary house with 150 sq m built-up area pays Rs 150 application fee (150 × Rs 1). It falls in the 126 to 200 sq m slab, so the permission fee is Rs 2,000. Total: Rs 150 + Rs 2,000 = Rs 2,150.\n\nIf the house is also used for shops, the fee is higher. Item 4 adds an additional charge of 50% of such amount of fees.\n\nIf the permission fee is not paid within 15 days of the intimation to pay, The authority may reject the application (Rule 21(3)(d)).",
+      "citations": 7,
+      "verified": 7,
+      "warnings": [
+        "table"
+      ],
       "error": "",
-      "seconds": 28.54,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 15.59,
+      "router": "groq",
+      "router_seconds": 0.69,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -258,22 +290,26 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
+        "21",
         "24",
-        "27"
+        "10",
+        "14"
       ],
       "mentioned_rules": [
+        "21",
         "24",
-        "27"
+        "10",
+        "14"
       ],
       "calc": [],
-      "answer": "No, a deviation from a sanctioned plan is generally not permissible (Rule 24(1)). If you still wish to alter the plan, the local authority may allow it only by charging a compounding fee as prescribed (Rule 24(3)). The authority can also sanction the plan with modifications or conditions at its discretion (Rule 27(1)). Therefore any change after sanction requires explicit permission and may involve fees.",
-      "citations": 3,
-      "verified": 3,
+      "answer": "Yes, you can change a sanctioned building plan, but there are limits. If the change is small, you pay a flat fee. If it is large, you have to apply again. Some kinds of change are not allowed at all.\n\nUnder Rule 21(3)(b), item 8, the fee for addition or alteration in the proposed plan is Rs. 500.00 for changes up to 10%. For changes above 10%, a fresh application according to the rule shall be necessary. Exactly 10% falls in the \"up to 10%\" row, so the Rs. 500 fee applies.\n\nRule 24(1) lists changes that are never allowed. No deviation from the sanctioned plan shall be permissible if the construction involved in such deviation does any of the following:\n- affects the front Marginal Open Space\n- exceeds 30% of the permissible FAR\n- is related to the parking area and public utility space\n- comes within the boundary of road or the area affecting the alignment of public road\n- comes in the area of any water body (talab), river or nallah or stream\n- comes within 30 meters or such distance from the bank of water bodies as may be prescribed in the respective development plan\n\nThere is a small allowance for height. Under Rule 24(2), for every floor constructed, an increase upto 0.15 meters in the height shall not be counted towards the height of the building.\n\nIf a deviation has already been built, Rule 24(3) says the local authority may charge such compounding fee, as may be prescribed in the respective Act governing the functioning of such local authority or the rules made there under. That fee is set in the municipal law, not in these rules.\n\nThe citizen should get the change approved before building it. Under Rule 10(1), if construction is not proceeding according to the sanctioned plan, the Building Officer will notify the owner, and all further construction not in conformity with these rules or any other law shall be stopped until correction has been effected and approved.\n\nIf the change is to a layout under a development permission (not a building plan), a separate procedure applies. Under Rule 14(3)(i), the application goes in Form-M given in Appendix-K. A public notice and hearing follow. Under Rule 14(3)(x), if the change is approved, the permission fee is equal to 50 per cent of the amount payable under clause (a) of sub-rule (3) of rule 21. However, no permission fee shall be payable if the modification does not involve any change in the approved layout.",
+      "citations": 10,
+      "verified": 10,
       "warnings": [],
       "error": "",
-      "seconds": 29.58,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 13.65,
+      "router": "groq",
+      "router_seconds": 0.76,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -290,22 +326,23 @@
         "56"
       ],
       "mentioned_rules": [
-        "56"
+        "56",
+        "42"
       ],
       "calc": [
         "Rear open space (minimum): 1.5 m"
       ],
-      "answer": "1.5 m, because the plot area is above 40.00 and up to 150.00 sq m (Rule 56(2)(a)).",
-      "citations": 2,
-      "verified": 2,
+      "answer": "1.5 m. This applies because the plot is 150 sq m and the building is a residential building up to 12.5 m high.\n\nUnder Rule 56(2)(a), every Residential Building, having height up to 12.5 meters, shall have a Rear Open Space as set out in this table: Above 40.00 and up to 150.00 — 1.50; Above 150 and up to 225.00 — 2.50. 150 sq m sits exactly on the boundary. It falls in the 1.50 m row because that row includes plots \"up to 150.00\", while the 2.50 m row starts only \"above 150\".\n\nUnder Rule 56(2)(b), the rear open space shall be co-extensive with the entire face of the rear wall.\n\nThe figure changes only if the building is taller than 12.5 m. In that case, under Rule 56(5), for building of height above 12.5 meters the open spaces around building shall be as given in Table 4 and 5 of Rule 42.",
+      "citations": 4,
+      "verified": 4,
       "warnings": [
         "table"
       ],
       "error": "",
-      "seconds": 26.84,
-      "router": "rules",
-      "router_seconds": 0.0,
-      "first_figure_s": 0.0,
+      "seconds": 7.67,
+      "router": "groq",
+      "router_seconds": 0.76,
+      "first_figure_s": 0.76,
       "rule_ok": true,
       "false_not_found": false,
       "figures_ok": true,
@@ -319,23 +356,25 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "12"
-      ],
-      "mentioned_rules": [
         "12",
         "2"
       ],
+      "mentioned_rules": [
+        "12",
+        "2",
+        "12-A"
+      ],
       "calc": [],
-      "answer": "300 sq m, because the plot matches the Development Plan, normally requires both a development permission and a building permission before construction can start (Rule 12(3)). Since the plot size is 300 sq m and conforms to the approved plan, the earlier rule would still mandate a separate development permission. But the provision was amended on 28 August 2026, allowing plots up to 500 sq m that conform to the Development Plan to proceed without a separate development permission (Rule 2(5)(c) amendment).",
-      "citations": 1,
-      "verified": 1,
+      "answer": "As amended on 28 August 2026, a 300 sq m plot that matches the Development Plan generally does not need separate development permission, because 300 sq m is within the 500 sq m limit. That amendment is not in the attached rulebook, so it cannot be shown to the citizen from these documents. The attached text (consolidated to 6 March 2025) gives a narrower answer.\n\nUnder the attached rules, Rule 12(1) says no person shall carry out any development or erect, re-erect or make alterations or demolish any building or cause the same to be done without obtaining a prior permission in writing in this regard from the Authority.\n\nRule 2(5) sets out two separate permissions:\n\nRule 2(5)(a): development permission comes from the Director of Town & Country Planning or any other officer authorized by him in this behalf for granting permission for development of land in Planning areas. Development includes,- (i) making material change in land including its sub division and change in its use in terms of occupancy: (ii) construction of any type of building.\n\nRule 2(5)(b): building permission comes from the Municipal Corporation for granting permission for construction/alteration, demolition of building in planning area and non-planning area falling within their respective jurisdictions.\n\nThe only route in the attached text that skips a separate development permission is Rule 2(5)(c). It covers land that is already developed in the Central area of the adopted Development Plan, in these areas, the building permission shall be issued by the local bodies as per the landuse and landuse permissibility of the Development Plan. These rules have no general size-based exemption for a 300 sq m plot. Rule 12(3) adds that both the permission for development and also the permission for building shall be necessary for commencement of building activities involving development of land as a composite building scheme. The quicker routes in Rule 12-A (inside Rule 12) do not apply here, because they cover only residential plots up to 186 sqm.\n\nThe amendment: on 28 August 2026 the Government of Madhya Pradesh amended Rule 2(5)(c). In summary, the local authority may now permit construction or reconstruction on plots up to 500 sq m that match the land use in the approved Development Plan. Such plots follow the Development Plan norms and do not need separate development permission under Rule 2(5)(a). This is a summary only, not quoted text.",
+      "citations": 7,
+      "verified": 7,
       "warnings": [
         "amendment"
       ],
       "error": "",
-      "seconds": 31.54,
-      "router": "rules",
-      "router_seconds": 0.001,
+      "seconds": 14.31,
+      "router": "groq",
+      "router_seconds": 0.81,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -350,20 +389,24 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "103"
+        "103",
+        "61",
+        "37"
       ],
       "mentioned_rules": [
-        "103"
+        "103",
+        "61",
+        "37"
       ],
       "calc": [],
-      "answer": "Rule 103 states that the norms and regulations applicable in the plan area shall be those prescribed in the relevant development plan (Rule 103). If the development plan’s norms differ or are contrary to the rules, the Director must examine the matter and forward a proposal to the Government, whose decision is final and becomes part of the development plan (Rule 103).",
-      "citations": 3,
-      "verified": 3,
+      "answer": "Rule 103 decides this. Its heading is \"Provisions of development plan to take precedence,\" and it says that the norms and regulations applicable in the plan area shall be such as prescribed in the relevant development plan.\n\nThe proviso to Rule 103 covers the case where the two disagree: if the norms and regulation as provided in the development plan are different or contrary to these rules, the Director shall examine and send his proposal to the Government. The decision taken by the Government in this regard shall be final and shall be integrated part of Development plan.\n\nSo the counter cannot settle the conflict itself. The Director examines the conflict and the State Government decides. That decision becomes part of the Development Plan.\n\nSome individual rules also point to the Development Plan. The Floor Area Ratio table in Rule 61 notes that F.A.R and Density may be adopted as provided in the Development Plans of respective towns. Rule 37(2) says that the various building uses and occupancies permitted in the various zones shall be as given in the development plan.",
+      "citations": 4,
+      "verified": 4,
       "warnings": [],
       "error": "",
-      "seconds": 33.64,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 6.78,
+      "router": "groq",
+      "router_seconds": 0.77,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -377,20 +420,29 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "83"
+        "83",
+        "26",
+        "2",
+        "42",
+        "16"
       ],
       "mentioned_rules": [
-        "83"
+        "83",
+        "102",
+        "26",
+        "2",
+        "42",
+        "16"
       ],
       "calc": [],
-      "answer": "12.5 m, because the building exceeds 12.5 meters (Rule 83 Provision of Lifts, Escalators or Moving Walks) – a lift must be provided. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (1)) – the owner must furnish lift installation details in Appendix A‑2(A) with the permission application. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (2)) – a work completion report must be submitted and the authority will issue a unique registration number for each lift. 12.5 m, because the building exceeds 12.5 meters (Rule 83 (5), (6), (9), (10), (14), (30)) – the owner must follow maintenance instructions, keep the lift insured, report any accident within 24 hours, maintain an inventory, and submit six‑monthly safety and audit reports as required by NBC.",
-      "citations": 9,
-      "verified": 9,
+      "answer": "A lift is required, because the building is taller than 12.5 m. Under Rule 83, provision for lifts shall be made for building more than 12.5 meters in height. Planning, design, installation, operation, maintenance and inspection of Lift, Escalator or Moving Walk to be installed in a building shall be in accordance with the provisions given in Section 5 of Part-VIII: of National Building Code (NBC).\n\nThe owner then has these duties under Rule 83.\n\nAt application, Rule 83(1): the owner shall furnish details related to installation of lift, escalator or moving walk along with building permission application in Appendix A- 2(A) to the concerned authority.\n\nAt completion, Rule 83(2): work completion report of erection of lift, escalator or moving walk shall be submitted by the owner in Appendix E-3 (A) at the time of obtaining completion certificate in rule 102. The Authority shall issue a unique registration number to each unit.\n\nInsurance and maintenance, Rule 83(4) and (5): the lift must be insured from recognized agency, along with the insurance of persons using them, and the owner shall follow the instruction of maintenance provided by the Lift Engineer after installation.\n\nSafe operation, Rule 83(6): The owner shall not use the lift, escalator or moving walk, which is not in a safe condition and he shall be solely responsible for it. If a lift stops being used, the owner shall either remove it or maintain it in safe mechanical condition after disconnecting it entirely from the electric supply.\n\nSix-monthly audit, Rule 83(7): the owner shall submit a six monthly periodical safety and audit report duly signed by the Lift Engineer. The authority then issues a certificate that must be displayed in the lift. However, the individual owner who is using lift, escalator or moving walk in his own residential premise shall be exempted from it.\n\nNon-compliance, Rule 83(8): the first lapse brings a warning to submit within two months. A second lapse brings a show cause notice, and after a hearing a decision regarding sealing operation of lift, escalator or moving walk may be taken by the Authority.\n\nAccidents, Rule 83(9): If any accident occurs, the owner shall give full details of accident within 24 hours to the concerned Authority.\n\nThe audit is signed by a Lift Engineer, who under Rule 26(9)(G) shall be competent to carry out all works related to installation, erection, testing, safety and audit of lift.\n\nFor FAR, Rule 2(30) excludes lift wells, service ducts machine room for lifts from built-up area. For height, Rule 2(9) does not count lift rooms and similar service equipment, provided the aggregate area of such structures does not exceed one-third of the area of roof of the building.\n\nThe same height also triggers fire rules. Under Rule 42(3), for building having height more than 12.5 meters the necessary drawings and details shall be submitted to the Authority incorporating all the fire fighting measures recommended in National Building Code Part-IV. If the building is a high-rise or special building, Rule 16(6)(2) also asks for location and details of lift enclosures; (d) location and size of fire lift on the plan.",
+      "citations": 16,
+      "verified": 16,
       "warnings": [],
       "error": "",
-      "seconds": 39.41,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 13.99,
+      "router": "groq",
+      "router_seconds": 0.68,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -404,23 +456,28 @@
       "found_expected": true,
       "status": "answered",
       "cited_rules": [
-        "56"
+        "56",
+        "57"
       ],
-      "mentioned_rules": [],
+      "mentioned_rules": [
+        "56",
+        "57(d)",
+        "42"
+      ],
       "calc": [
         "Front open space (minimum): 3.0 m"
       ],
-      "answer": "सामने का खुला स्थान (न्यूनतम): 3.0 m (नियम 56(1)(a), पृष्ठ 77)। सड़क की चौड़ाई 9.0 मीटर, तालिका की पंक्ति \"Up to 9.0 meters\" में आती है।",
-      "citations": 1,
-      "verified": 1,
+      "answer": "3.0 मीटर आगे खाली छोड़नी होगी। यह आंकड़ा तब लागू होता है जब भवन आवासीय हो और उसकी ऊंचाई 12.5 मीटर तक हो। नागरिक ने भवन का उपयोग नहीं बताया है, इसलिए यह गणना आवासीय भवन मानकर की गई है।\n\nनियम 56(1)(a) के अनुसार 12.5 मीटर तक ऊंचाई वाले हर आवासीय भवन के सामने, जो सड़क की ओर हो, नीचे दी गई खुली जगह छोड़नी होगी। यह जगह प्लॉट का ही हिस्सा होगी। इस तालिका में पहली पंक्ति है: Up to 9.0 meters — 3.0 meters। सड़क ठीक 9.0 मीटर चौड़ी है, इसलिए यह \"Up to 9.0 meters\" (9.0 मीटर तक) वाली पंक्ति में आती है। अगली पंक्ति (3.6 मीटर) केवल \"More than 9.0 meters\" यानी 9.0 मीटर से अधिक चौड़ी सड़क पर लागू होती है।\n\nअगर भवन आवासीय नहीं है तो आंकड़ा बदल जाएगा। उदाहरण के लिए नियम 57(d) में व्यवसायिक, मर्केंटाइल और स्टोरेज भवनों के लिए सामने कम से कम 6 मीटर और बाकी तीन ओर 4.5 मीटर खुली जगह चाहिए। अगर ये भवन केवल आवासीय ज़ोन में हों या ऐसे आवासीय ज़ोन में जहाँ दुकानों की कतार की अनुमति है, तो इन खुली जगहों में छूट दी जा सकती है। इसी तरह, 12.5 मीटर से ऊंचे भवन पर नियम 56(5) लागू होता है, जिसके अनुसार ऐसे भवन के चारों ओर की खुली जगह नियम 42 की तालिका 4 और 5 के अनुसार तय होगी। इसलिए नागरिक से भवन का उपयोग और प्रस्तावित ऊंचाई पक्की कर लें।",
+      "citations": 4,
+      "verified": 4,
       "warnings": [
-        "info"
+        "table"
       ],
       "error": "",
-      "seconds": 36.03,
-      "router": "rules",
-      "router_seconds": 0.0,
-      "first_figure_s": 0.0,
+      "seconds": 17.41,
+      "router": "groq",
+      "router_seconds": 0.57,
+      "first_figure_s": 0.57,
       "rule_ok": true,
       "false_not_found": false,
       "figures_ok": true,
@@ -440,14 +497,16 @@
         "21"
       ],
       "calc": [],
-      "answer": "बिल्डिंग परमिशन की फीस प्रस्तावित निर्मित क्षेत्र के प्रत्येक वर्ग मीटर पर ₹1.00 है, यह नियम 21 के उप‑नियम (3) के अनुच्छेद (ii) में निर्धारित है।",
-      "citations": 1,
-      "verified": 1,
-      "warnings": [],
+      "answer": "बिल्डिंग परमिशन की फीस नियम 21 में लिखी है। इसमें दो फीस लगती हैं: आवेदन फीस और परमिशन फीस। सही राशि दो बातों से तय होगी: प्रस्तावित built-up area (वर्ग मीटर) और भवन का उपयोग। भवन high rise है या नहीं, यह भी देखना होगा।\n\nआवेदन फीस नियम 21(2) में है। बिल्डिंग परमिशन के लिए प्रस्तावित built-up area पर Rs 1.00 प्रति वर्ग मीटर लगता है। आवेदन फीस किसी भी हालत में वापस नहीं होती। आवेदन के साथ फीस की रसीद की attested copy लगानी होती है। बिना रसीद का आवेदन valid नहीं माना जाता और खारिज हो जाता है।\n\nपरमिशन फीस नियम 21(3) में है। यह फीस परमिशन जारी होने से पहले जमा करनी होती है। साधारण भवन (high rise नहीं) के लिए नियम 21(3)(b) की तालिका लागू है। केवल आवासीय भवन की फीस built-up area के हिसाब से यह है:\n\n0 से 75 वर्ग मीटर: Rs 750\n76 से 125: Rs 1,250\n126 से 200: Rs 2,000\n201 से 300: Rs 3,000\n301 से 400: Rs 4,000\n401 से 600: Rs 6,000\n601 से 750: Rs 7,500\n751 से 1,000: Rs 10,000\n1,001 से 1,250: Rs 12,500\n1,251 से 1,500: Rs 15,000\n1,501 से 2,000: Rs 20,000\n2,001 से 2,500: Rs 25,000\n2500 से ऊपर: Rs 50,000\n\nदुकान, व्यापार, व्यावसायिक या औद्योगिक भवन, और दुकान-सह-आवास के लिए यही फीस लगती है और उस पर 50% अतिरिक्त जुड़ता है। सामाजिक, धार्मिक, शैक्षणिक भवन और धर्मशाला पर आवासीय वाली फीस ही लगती है। सिनेमा के लिए 800 सीट तक Rs 15,000 और 800 से ऊपर Rs 25,000 है।\n\nHigh rise भवन के लिए नियम 21(3)(c) लागू है। केवल आवासीय भवन पर built-up area का Rs 10.00 प्रति वर्ग मीटर लगता है। व्यावसायिक या औद्योगिक भवन पर इसका 100% अतिरिक्त, यानी कुल दोगुना। दुकान-सह-आवास पर 50% अतिरिक्त।\n\nबदलाव और पुनर्वैधीकरण की फीस भी इसी तालिका में है। प्रस्तावित नक्शे में 10% तक बदलाव पर Rs 500.00 लगते हैं। 10% से ज़्यादा बदलाव हो तो नया आवेदन देना होगा। परमिशन के पुनर्वैधीकरण पर मूल परमिशन फीस का 10% लगता है।\n\nफीस जमा करने की सूचना मिलने के 15 दिन के अंदर फीस जमा न हो तो Authority आवेदन खारिज कर सकती है।\n\nनागरिक का प्रस्तावित built-up area और भवन का उपयोग बता दें, तो ऊपर की सही पंक्ति से फीस निकल आएगी।",
+      "citations": 8,
+      "verified": 8,
+      "warnings": [
+        "table"
+      ],
       "error": "",
-      "seconds": 4.7,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 17.28,
+      "router": "groq",
+      "router_seconds": 0.64,
       "first_figure_s": null,
       "rule_ok": true,
       "false_not_found": false,
@@ -463,14 +522,14 @@
       "cited_rules": [],
       "mentioned_rules": [],
       "calc": [],
-      "answer": "The MP Bhumi Vikas Rules do not contain provisions for online payment of property tax.",
+      "answer": "The MP Bhumi Vikas Rules, 2012 deal with development and building permission and do not cover how to pay property tax online.",
       "citations": 0,
       "verified": 0,
       "warnings": [],
       "error": "",
-      "seconds": 30.89,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 3.41,
+      "router": "groq",
+      "router_seconds": 0.6,
       "first_figure_s": null,
       "not_found_ok": true,
       "lang_ok": true,
@@ -485,14 +544,14 @@
       "cited_rules": [],
       "mentioned_rules": [],
       "calc": [],
-      "answer": "The rulebook does not contain any information on market rates for land.",
+      "answer": "The MP Bhumi Vikas Rules, 2012 regulate development and building permission and do not contain any land market rates, including for Kolar Road, Bhopal.",
       "citations": 0,
       "verified": 0,
       "warnings": [],
       "error": "",
-      "seconds": 16.81,
-      "router": "rules",
-      "router_seconds": 0.0,
+      "seconds": 3.97,
+      "router": "groq",
+      "router_seconds": 0.59,
       "first_figure_s": null,
       "not_found_ok": true,
       "lang_ok": true,

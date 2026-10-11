@@ -1,6 +1,6 @@
 # Kshiti accuracy on the 17 official sample questions
 
-Run: 11-10-2026 15:35 · model: openai/gpt-oss-120b on Groq · full pipeline
+Run: 11-10-2026 15:54 · model: claude-opus-5-5 · full pipeline
 
 | Measure | Result |
 |---|---|
@@ -9,29 +9,29 @@ Run: 11-10-2026 15:35 · model: openai/gpt-oss-120b on Groq · full pipeline
 | Wrong "not found" on answerable questions | 0 |
 | Correct table figures | 5/5 (100%) |
 | Answer in the question's language | 17/17 (100%) |
-| Quotes verified word for word | 37/37 (100%) |
+| Quotes verified word for word | 107/107 (100%) |
 | Invented rule numbers | 0 |
 | Later amendment flagged (Q11) | 1/1 (100%) |
-| Median time per answer | 29.6 s |
+| Median time per answer | 12.8 s |
 
 | # | Lang | Status | Rules cited | Rule | Figures | Lang | Quotes | Time |
 |---|---|---|---|---|---|---|---|---|
-| 1 | en | answered | 56 | ✅ | ✅ | ✅ | 2/2 | 2.93 s |
-| 2 | en | answered | 17 | ✅ | ✅ | ✅ | 2/2 | 10.23 s |
-| 3 | en | answered | 23 | ✅ | — | ✅ | 2/2 | 18.62 s |
-| 4 | en | answered | 28 | ✅ | — | ✅ | 1/1 | 31.81 s |
-| 5 | en | answered | 52 | ✅ | ✅ | ✅ | 2/2 | 26.79 s |
-| 6 | en | answered | 18, 26, 26-B | ✅ | — | ✅ | 4/4 | 30.7 s |
-| 7 | en | answered | 16, 14 | ✅ | — | ✅ | 2/2 | 31.11 s |
-| 8 | en | answered | 21 | ✅ | — | ✅ | 2/2 | 28.54 s |
-| 9 | en | answered | 24, 27 | ✅ | — | ✅ | 3/3 | 29.58 s |
-| 10 | en | answered | 56 | ✅ | ✅ | ✅ | 2/2 | 26.84 s |
-| 11 | en | answered | 12 | ✅ | — | ✅ | 1/1 | 31.54 s |
-| 12 | en | answered | 103 | ✅ | — | ✅ | 3/3 | 33.64 s |
-| 13 | en | answered | 83 | ✅ | — | ✅ | 9/9 | 39.41 s |
-| 14 | hi | answered | 56 | ✅ | ✅ | ✅ | 1/1 | 36.03 s |
-| 15 | hi | answered | 21 | ✅ | — | ✅ | 1/1 | 4.7 s |
-| 16 | en | not_found | — | ✅ | — | ✅ | 0/0 | 30.89 s |
-| 17 | en | not_found | — | ✅ | — | ✅ | 0/0 | 16.81 s |
+| 1 | en | answered | 56, 103 | ✅ | ✅ | ✅ | 4/4 | 8.28 s |
+| 2 | en | answered | 17 | ✅ | ✅ | ✅ | 5/5 | 12.2 s |
+| 3 | en | answered | 23 | ✅ | — | ✅ | 3/3 | 12.75 s |
+| 4 | en | answered | 28, 35, 26-B | ✅ | — | ✅ | 4/4 | 9.76 s |
+| 5 | en | answered | 52 | ✅ | ✅ | ✅ | 2/2 | 6.39 s |
+| 6 | en | answered | 18, 26, 14 | ✅ | — | ✅ | 11/11 | 14.33 s |
+| 7 | en | answered | 14, 16, 21, 15, 83, 19, 12 | ✅ | — | ✅ | 18/18 | 20.9 s |
+| 8 | en | answered | 21, 2 | ✅ | — | ✅ | 7/7 | 15.59 s |
+| 9 | en | answered | 21, 24, 10, 14 | ✅ | — | ✅ | 10/10 | 13.65 s |
+| 10 | en | answered | 56 | ✅ | ✅ | ✅ | 4/4 | 7.67 s |
+| 11 | en | answered | 12, 2 | ✅ | — | ✅ | 7/7 | 14.31 s |
+| 12 | en | answered | 103, 61, 37 | ✅ | — | ✅ | 4/4 | 6.78 s |
+| 13 | en | answered | 83, 26, 2, 42, 16 | ✅ | — | ✅ | 16/16 | 13.99 s |
+| 14 | hi | answered | 56, 57 | ✅ | ✅ | ✅ | 4/4 | 17.41 s |
+| 15 | hi | answered | 21 | ✅ | — | ✅ | 8/8 | 17.28 s |
+| 16 | en | not_found | — | ✅ | — | ✅ | 0/0 | 3.41 s |
+| 17 | en | not_found | — | ✅ | — | ✅ | 0/0 | 3.97 s |
 
 Answer key: eval/answer_key.json. Full answers: eval/results.json.

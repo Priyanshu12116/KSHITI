@@ -8,6 +8,7 @@ checked by verify.py before anything is shown.
 from __future__ import annotations
 
 import os
+import re
 import time
 from collections.abc import Callable
 from functools import lru_cache
@@ -124,7 +125,8 @@ def parse_message(question: str, message) -> Answer:
             ans.status = "need_inputs"
             ans.not_found_reason = block.input.get("prompt", "")
             ans.missing_inputs = [MissingInput(**m) for m in block.input.get("missing", [])]
-    ans.text = "".join(parts).strip()
+    # The interface shows plain text: drop markdown emphasis and headings if the model adds them.
+    ans.text = re.sub(r"\*\*|__|^#{1,6}\s*", "", "".join(parts).strip(), flags=re.M)
     if ans.text:
         ans.lang = detect_lang(ans.text)
 

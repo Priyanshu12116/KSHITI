@@ -40,8 +40,8 @@ def accuracy_text() -> str:
                 f"(wrong not-found {s['false_not_found']}), table figures {s['figure_hit']}/{s['figure_total']}, "
                 f"answer language {s['lang_hit']}/{s['lang_total']}, quotes verified {s['quotes_verified']}/{s['quotes_total']}, "
                 f"invented rule numbers {s['invented_rules']}, amendment flagged {s['amendment_hit']}/{s['amendment_total']}. "
-                "Q14 was answered by the calculator after the model wrongly said \"not found\". Single answers took 3 to 5 s; "
-                "the batch median was higher because of free-tier rate limits.")
+                f"Median time {s['median_seconds']} s. The free fallback engine (gpt-oss-120b on Groq) also scored 15/15 rules, "
+                "2/2 not found, 5/5 figures, 17/17 language and 37/37 verified quotes, with one Hindi answer rescued by the calculator.")
     s = json.loads(off.read_text(encoding="utf-8"))["summary"]
     return (f"Offline check on the 17 official sample questions (router and calculator, no AI): calculator figures "
             f"{s['calc_figure_hit']}/{s['calc_figure_total']} correct, out-of-scope questions caught "

@@ -153,7 +153,7 @@
       + (s.groq ? chip(`Groq ${groqModel}`, s.groq, s.groq_model) : "");
     // Describe the engine that is actually answering.
     const groq = s.engine === "groq";
-    $('[data-i18n="h1_d"]').textContent = s.cerebras ? t("h1_d") : t("h1_d_local");
+    $('[data-i18n="h1_d"]').textContent = s.cerebras ? t("h1_d") : s.router === "groq" ? t("h1_d_groq") : t("h1_d_local");
     $('[data-i18n="h3_d"]').textContent = groq ? t("h3_d_groq").replace("{m}", groqModel) : t("h3_d");
     renderAccuracy(m.accuracy);
   }
@@ -191,6 +191,10 @@
       ${s.median_seconds != null ? `<div class="acc__row"><span class="acc__label">${esc(t("acc_time"))}</span><span class="acc__val">${secs(s.median_seconds)}</span></div>` : ""}
       <p class="acc__foot">${esc(t("acc_foot"))} · ${esc(acc.run_date || "")} · ${esc(acc.model || "")}</p></div>`;
     requestAnimationFrame(() => $$(".acc__bar i", box).forEach((i) => { i.style.width = i.style.getPropertyValue("--w"); }));
+  }
+
+  function routerName(src) {
+    return src === "cerebras" ? "Cerebras" : src === "groq" ? "gpt-oss-20b (Groq)" : t("st_rules");
   }
 
   function engineName(model) {
@@ -279,7 +283,7 @@
     const data = JSON.parse(raw);
     if (kind === "route") {
       state.route = data;
-      setStage("route", "done", `${data.source === "cerebras" ? "Cerebras" : t("st_rules")} · ${secs(data.seconds)}`);
+      setStage("route", "done", `${routerName(data.source)} · ${secs(data.seconds)}`);
       setStage("calc", "active");
     } else if (kind === "calc") {
       state.calc = data;
@@ -410,7 +414,7 @@
     }
 
     // stages
-    if (result.route) setStage("route", "done", `${result.route.source === "cerebras" ? "Cerebras" : t("st_rules")} · ${secs(result.route.seconds)}`);
+    if (result.route) setStage("route", "done", `${routerName(result.route.source)} · ${secs(result.route.seconds)}`);
     const n = result.calc?.results?.length || 0;
     setStage("calc", n ? "done" : "skip", n ? `${n} · ${secs(result.seconds_to_first_figure)}` : t("st_none"));
     if (a.status === "error") setStage("answer", "fail", "");
