@@ -27,7 +27,9 @@ CLAUSE_RE = re.compile(
 )
 MAX_CHUNK = 900   # characters; keeps quotes short enough to read at the counter
 MAX_TABLE = 3400  # a table stays in one block so its header and rows are quoted together
-TABLE_START_RE = re.compile(r"^\s*(S\.\s?No|Item\s{3,}|\(1\)\s{3,}\(2\))", re.IGNORECASE | re.MULTILINE)
+TABLE_START_RE = re.compile(
+    r"^\s*(S\.\s?No|S\.\s+[A-Z][a-z]|Item\s{3,}|\(1\)\s{3,}\(2\)|(?-i:TABLE)\b)", re.IGNORECASE | re.MULTILINE
+)
 # A lettered clause such as "(b) In case of ..." written as prose ends a table.
 TABLE_END_RE = re.compile(r"^\s{0,12}\((?:[a-z]|[ivx]{1,4})\)\s+\S+(?:\s\S+){3,}\s*$")
 MIN_CHUNK = 120   # merge tiny fragments into their neighbour

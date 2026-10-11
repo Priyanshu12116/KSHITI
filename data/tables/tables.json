@@ -1,0 +1,79 @@
+{
+  "_about": "Values used by kshiti/calculator.py. Every value was read from the official English PDF (data/source/rules_EN.pdf) on the page given and is also checked against the rule text by tests/test_calculator.py. Checked on 11-10-2026 against MP Bhumi Vikas Rules 2012 consolidated to 06-03-2025.",
+  "front_open_space": {
+    "rule": "56", "sub_rule": "56(1)(a)", "page": 77, "table_marker": "Width of street facing the plot",
+    "applies_to": "Residential building with height up to 12.5 m",
+    "input": "road_width_m", "unit": "m",
+    "rows": [
+      {"above": null, "upto": 9.0,  "value": 3.0, "row_text": "Up to 9.0 meters"},
+      {"above": 9.0,  "upto": 12.0, "value": 3.6, "row_text": "More than 9.0 meters and up to 12 meters"},
+      {"above": 12.0, "upto": 18.0, "value": 4.5, "row_text": "More than 12.0 meters and up to 18 meters"},
+      {"above": 18.0, "upto": null, "value": 6.0, "row_text": "Above 18 meters"}
+    ]
+  },
+  "rear_open_space": {
+    "rule": "56", "sub_rule": "56(2)(a)", "page": 78, "table_marker": "Minimum Rear Open space",
+    "applies_to": "Residential building with height up to 12.5 m",
+    "input": "plot_area_sqm", "unit": "m",
+    "rows": [
+      {"above": null,  "upto": 40.0,  "value": 0.0, "row_text": "Up to 40.00", "display": "Nil"},
+      {"above": 40.0,  "upto": 150.0, "value": 1.5, "row_text": "Above 40.00 and up to 150.00"},
+      {"above": 150.0, "upto": 225.0, "value": 2.5, "row_text": "Above 150 and up to 225.00"},
+      {"above": 225.0, "upto": null,  "value": 3.0, "row_text": "Above 225.00"}
+    ]
+  },
+  "side_open_space": {
+    "rule": "56", "sub_rule": "56(3)", "page": 78,
+    "detached": {"value": 3.0, "sides": "both", "relaxed_value": 1.5, "relaxed_if": "height up to 7 m and frontage less than 12 m (one side only)",
+                 "quote": "For detached buildings there shall be minimum side open spaces of 3\n                meters on both the sides"},
+    "semi_detached": {"value": 3.0, "sides": "one", "relaxed_value": 2.5, "relaxed_if": "height up to 10 m and frontage up to 10 m",
+                      "quote": "For semi-detached building there shall be a minimum side open space of\n               3.0 meters on one side"},
+    "row": {"value": 0.0, "sides": "none", "quote": "For row-type buildings, no side open space is required."}
+  },
+  "far": {
+    "rule": "61", "sub_rule": "61 (Table 8)", "page": 83, "table_marker": "FLOOR AREA RATIO FOR DIFFERENT USE GROUP",
+    "rows": [
+      {"use": "residential", "category": "", "value": 1.25, "row_text": "Resdential             1.25"},
+      {"use": "commercial", "category": "City Centre", "value": 2.50, "row_text": "2.50         City Centre"},
+      {"use": "commercial", "category": "Sub-city center", "value": 2.00, "row_text": "2.00         Sub-city center"},
+      {"use": "commercial", "category": "Community Center", "value": 1.75, "row_text": "1.75         Community Center"},
+      {"use": "commercial", "category": "Local Shopping Centre", "value": 1.50, "row_text": "1.50         Local Shopping Centre"},
+      {"use": "commercial", "category": "Convenience Shopping Centre", "value": 1.25, "row_text": "1.25         Convenience Shopping Centre"},
+      {"use": "public_semi_public", "category": "", "value": 1.00, "row_text": "1.00         Administrative Areas"}
+    ],
+    "note": "F.A.R and Density may be adopted as provided in the Development Plans of respective towns."
+  },
+  "height_above_12_5": {
+    "rule": "42", "sub_rule": "42(1) (Table 4)", "page": 58, "table_marker": "TABLE No. 4",
+    "rows": [
+      {"min_road_m": 12.0, "min_plot_sqm": 1000, "min_frontage_m": 18, "far": 1.50, "max_height_m": 18, "front_mos_m": 7.5,  "side_rear_mos_m": 6.0, "row_text": "12.0 m. 1000 sq. 18 m.        1:1.50"},
+      {"min_road_m": 18.0, "min_plot_sqm": 1500, "min_frontage_m": 21, "far": 1.75, "max_height_m": 24, "front_mos_m": 9.0,  "side_rear_mos_m": 6.0, "row_text": "18 m. & 1500 sq. 21 m.        1:1.75"},
+      {"min_road_m": 24.0, "min_plot_sqm": 2000, "min_frontage_m": 30, "far": 2.00, "max_height_m": 30, "front_mos_m": 12.0, "side_rear_mos_m": 7.5, "row_text": "24 m. & 2000 sq. 30 m.        1:2.0"}
+    ]
+  },
+  "application_fee": {
+    "rule": "21", "sub_rule": "21(2)(ii)", "page": 35, "rate_per_sqm": 1.0,
+    "quote": "for the Building Permission Rs 1.00 per Square meter of the proposed built-"
+  },
+  "permission_fee_residential": {
+    "rule": "21", "sub_rule": "21(3)(b), Item 1", "page": 36, "table_marker": "A building intended to be used",
+    "applies_to": "Building permission (other than high rise buildings), building used exclusively as residence",
+    "rows": [
+      {"from": 0,    "to": 75,   "fee": 750,   "row_text": "0          75         750"},
+      {"from": 76,   "to": 125,  "fee": 1250,  "row_text": "76         125       1,250"},
+      {"from": 126,  "to": 200,  "fee": 2000,  "row_text": "126         200       2,000"},
+      {"from": 201,  "to": 300,  "fee": 3000,  "row_text": "201         300       3,000"},
+      {"from": 301,  "to": 400,  "fee": 4000,  "row_text": "301         400       4,000"},
+      {"from": 401,  "to": 600,  "fee": 6000,  "row_text": "401         600       6,000"},
+      {"from": 601,  "to": 750,  "fee": 7500,  "row_text": "601         750       7,500"},
+      {"from": 751,  "to": 1000, "fee": 10000, "row_text": "751        1,000     10,000"},
+      {"from": 1001, "to": 1250, "fee": 12500, "row_text": "1,001       1,250     12,500"},
+      {"from": 1251, "to": 1500, "fee": 15000, "row_text": "1,251       1,500     15,000"},
+      {"from": 1501, "to": 2000, "fee": 20000, "row_text": "1,501       2,000     20,000"},
+      {"from": 2001, "to": 2500, "fee": 25000, "row_text": "2,001       2,500     25,000"},
+      {"from": 2501, "to": null, "fee": 50000, "row_text": "above 2500               50,000"}
+    ],
+    "surcharge_50_percent_for": ["commercial", "shop_cum_residence"],
+    "surcharge_quote": "together with additional charge of"
+  }
+}

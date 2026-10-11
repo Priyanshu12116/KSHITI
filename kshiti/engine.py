@@ -54,8 +54,13 @@ def rule_documents() -> tuple[dict, ...]:
     return tuple(docs)
 
 
-def build_request(question: str) -> dict:
-    """The full request body (without streaming/beta options). Pure: no network."""
+def build_request(question: str, context: str = "") -> dict:
+    """The full request body (without streaming/beta options). Pure: no network.
+
+    `context` (calculator results) goes after the cached rulebook, so caching still works."""
+    text = f"Question at the counter:\n{question.strip()}"
+    if context:
+        text += f"\n\n{context}"
     return {
         "model": MODEL,
         "max_tokens": MAX_TOKENS,
@@ -67,7 +72,7 @@ def build_request(question: str) -> dict:
                 "role": "user",
                 "content": [
                     *rule_documents(),
-                    {"type": "text", "text": f"Question at the counter:\n{question.strip()}"},
+                    {"type": "text", "text": text},
                 ],
             }
         ],
@@ -159,7 +164,7 @@ def _stream(req: dict, on_text: Callable[[str], None] | None, t0: float, timing:
         return run(_client().messages.stream(**req))
 
 
-def ask(question: str, on_text: Callable[[str], None] | None = None) -> Answer:
+def ask(question: str, on_text: Callable[[str], None] | None = None, context: str = "") -> Answer:
     """Answer one counter question. Never raises: errors come back as status='error'."""
     t0 = time.perf_counter()
     timing = Timing()
@@ -167,7 +172,7 @@ def ask(question: str, on_text: Callable[[str], None] | None = None) -> Answer:
     if not question:
         return Answer(question="", status="error", error="Please type a question.")
     try:
-        message = _stream(build_request(question), on_text, t0, timing)
+        message = _stream(build_request(question, context), on_text, t0, timing)
         ans = verify(parse_message(question, message))
     except anthropic.AuthenticationError:
         ans = Answer(question=question, lang=detect_lang(question), status="error",
