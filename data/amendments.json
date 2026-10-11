@@ -9,8 +9,18 @@
     "summary_hi": "28 अगस्त 2026 को मध्यप्रदेश शासन ने नियम 2(5)(ग) में संशोधन किया। विकास योजना के भूमि उपयोग के अनुरूप 500 वर्ग मीटर तक के भूखण्डों पर स्थानीय निकाय निर्माण या पुनर्निर्माण की अनुमति दे सकता है, विकास योजना के मानदंडों के अधीन, नियम 2(5)(क) के अंतर्गत अलग विकास अनुज्ञा के बिना।",
     "in_dataset": false,
     "verbatim_text_available": false,
-    "triggers": ["2"],
-    "keywords": ["development permission", "500 sq", "2(5)", "separate permission", "विकास अनुज्ञा", "विकास अनुमति"],
+    "triggers": [
+      "2"
+    ],
+    "keywords": [
+      "separate development permission",
+      "separate permission",
+      "without development permission",
+      "2(5)",
+      "अलग विकास अनुज्ञा",
+      "अलग विकास अनुमति",
+      "अलग अनुमति"
+    ],
     "source_name": "TeamLease RegTech summary of the Government of MP amendment (read 11 Oct 2026); link given in the official Track 1 problem statement",
     "source_url": "https://teamleaseregtech.com/updates/article/59469/government-of-madhya-pradesh-amendment-to-land-development-rules"
   }
