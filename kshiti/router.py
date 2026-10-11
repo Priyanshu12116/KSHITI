@@ -55,7 +55,7 @@ TOPIC_WORDS = {
     "front_setback": r"\bfront\b|aage|आगे|सामने की (?:जगह|खुली)|front setback|front margin",
     "rear_setback": r"\brear\b|\bback\b|peeche|piche|पीछे",
     "side_setback": r"\bside\b|बगल|पार्श्व|side open",
-    "far": (r"\bfar\b|floor area|how many floors|floors?\s+can|storeys?\s+can|built[\s-]*up\s+area\s+allowed|"
+    "far": (r"(?-i:\bFAR\b)|floor\s+area|how many floors|floors?\s+can|storeys?\s+can|built[\s-]*up\s+area\s+allowed|"
             r"kitni\s+(?:manzil|manjil)|कितनी\s+(?:मंज़िल|मंजिल)|कितने\s+(?:तल|फ्लोर)|एफएआर|फर्शी क्षेत्र"),
     "height": (r"max(?:imum)?\s+height|height\s+limit|how\s+(?:tall|high)|how many floors|floors?\s+can|storeys?\s+can|"
                r"kitni\s+(?:manzil|manjil|unchai)|कितनी\s+(?:मंज़िल|मंजिल|ऊँचाई|ऊंचाई)|(?:ऊँचाई|ऊंचाई)\s+कितनी|"
@@ -63,6 +63,11 @@ TOPIC_WORDS = {
     "fee": r"\bfees?\b|shulk|शुल्क|फीस|charges?|kitna paisa|पैसे",
 }
 OUT_OF_SCOPE = r"property\s*tax|house\s*tax|market\s*(rate|price|value)|land\s*(rate|price)|circle\s*rate|stamp\s*duty|registry|संपत्ति\s*कर|प्रॉपर्टी\s*टैक्स|बाजार\s*(भाव|दर|मूल्य)|बाज़ार\s*(भाव|दर|मूल्य)|ज़मीन\s*का\s*रेट|जमीन\s*का\s*रेट"
+# Uses with their own norms elsewhere in the rules: the residential calculator must not answer for them.
+SPECIAL_USE = (r"farm\s*house|agricultur|tourist facility|cinema|theat(?:re|er)|marriage\s+garden|mangal\s+karyalaya|"
+               r"fuel|petrol|filling\s+station|multiplex|shopping\s+mall|\bmall\b|group\s+housing|industr|factory|"
+               r"hostel|hospital|school|college|dharmshala|फार्म\s*हाउस|फ़ार्म\s*हाउस|कृषि|सिनेमा|मैरिज|विवाह\s*उद्यान|"
+               r"पेट्रोल|उद्योग|औद्योगिक|कारखाना|अस्पताल|विद्यालय")
 USE_WORDS = {
     "shop_cum_residence": r"shop[\s-]*cum[\s-]*residen|दुकान\s*सह\s*आवास",
     "commercial": r"commercial|\bshop|showroom|office|दुकान|वाणिज्यिक|कमर्शियल",
@@ -102,16 +107,19 @@ def rule_based_route(question: str) -> Route:
         notes.append(f"{plot_ft:g} sq ft converted to {plot:g} sq m.")
     inp.plot_area_sqm = plot
 
-    for use, pat in USE_WORDS.items():
-        if re.search(pat, ql, re.I):
-            inp.building_use = use
-            break
+    if re.search(SPECIAL_USE, ql, re.I):
+        inp.building_use = "other"            # norms for this use are not in the residential tables
+    else:
+        for use, pat in USE_WORDS.items():
+            if re.search(pat, ql, re.I):
+                inp.building_use = use
+                break
     for kind, pat in TYPE_WORDS.items():
         if re.search(pat, ql, re.I):
             inp.building_type = kind
             break
 
-    topics = [t for t, pat in TOPIC_WORDS.items() if re.search(pat, ql, re.I)]
+    topics = [t for t, pat in TOPIC_WORDS.items() if re.search(pat, q, re.I)]
     has_numbers = any(v is not None for v in (inp.road_width_m, inp.building_height_m, inp.plot_area_sqm, inp.built_up_area_sqm))
     if re.search(OUT_OF_SCOPE, ql, re.I):
         intent: Intent = "out_of_scope"
@@ -227,6 +235,8 @@ def route(question: str) -> Route:
         if getattr(fast.inputs, field) is None and getattr(base.inputs, field) is not None:
             setattr(fast.inputs, field, getattr(base.inputs, field))
     fast.topics = [t for t in ALL_TOPICS if t in set(fast.topics) | set(base.topics)]
+    if base.inputs.building_use == "other":
+        fast.inputs.building_use = "other"     # special uses never get residential figures
     if base.intent == "out_of_scope":
         fast.intent = "out_of_scope"
     elif fast.intent == "out_of_scope" and base.topics:

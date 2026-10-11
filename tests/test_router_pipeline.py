@@ -69,6 +69,19 @@ def test_fee_questions(k):
     assert "fee" in rule_based_route(Q[k]).topics
 
 
+def test_farm_house_never_gets_residential_figures():
+    r = rule_based_route(Q[2])
+    assert r.inputs.building_use == "other"
+    out = calculate(r.inputs, r.topics)
+    assert not out.results and out.notes_en
+
+
+def test_how_far_is_not_floor_area_ratio():
+    r = rule_based_route("How far must my balcony stay from a low-voltage overhead electric line, vertically and horizontally?")
+    assert "far" not in r.topics
+    assert "far" in rule_based_route("What is the FAR for a residential plot?").topics
+
+
 def test_square_feet_converted():
     r = rule_based_route("My plot is 1500 sq ft on a 9 m road, front open space?")
     assert r.inputs.plot_area_sqm == pytest.approx(139.35, abs=0.01) and r.notes

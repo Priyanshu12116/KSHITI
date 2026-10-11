@@ -298,6 +298,11 @@ def _has(inp: CalcInputs, need: str) -> bool:
 def calculate(inp: CalcInputs, topics: list[str]) -> CalcOutput:
     out = CalcOutput()
     non_res = inp.building_use not in (None, "residential", "shop_cum_residence")
+    if inp.building_use == "other":
+        # Farm houses, cinemas, fuel stations, industry etc. have their own norms in their own rules.
+        out.notes_en.append("This use has its own norms in the rules; the residential tables are not used. See the cited rule.")
+        out.notes_hi.append("इस उपयोग के अपने मानदंड नियमों में हैं; आवासीय तालिकाएँ लागू नहीं की गईं। उद्धृत नियम देखें।")
+        return out
     for topic in [t for t in ALL_TOPICS if t in topics]:
         if topic in ("front_setback", "rear_setback", "side_setback") and non_res:
             out.notes_en.append("Open spaces for non-residential buildings follow Rule 57; not calculated here.")
